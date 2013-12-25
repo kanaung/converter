@@ -1,0 +1,28 @@
+#wrap{
+	float: none;
+	clear: both;
+	position:absolute;
+	bottom:0px;
+}
+.cvcontainer {
+	position:relative;
+	width: 40%;
+	margin: auto;
+	padding: auto;
+	text-align: center;
+	background: #000;
+	background: rgba(0,0,0,0.0);
+}
+#coverflow{
+	position: absolute;
+	padding: 30px 20px;
+	margin: auto;
+}
+a {
+	color: #fff;
+}
+#rawrap {
+	width: 30%;
+	position:relative;
+	margin:auto;
+}
