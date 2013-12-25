@@ -9,7 +9,7 @@ Usage
 =====
 ```
 include('class-converter.php');
-$source_text = "ေနေကာင္းလား";
+$source_text = "aeaumif;vm;";
 $options = array(
 		'input_font' => 'win', // win, ay, zg, uni
 		'output' => 'zg', // ay, zg, uni
