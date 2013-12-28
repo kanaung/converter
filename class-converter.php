@@ -1,5 +1,5 @@
 <?php
-//error_reporting(E_ALL);
+error_reporting(E_ALL);
 class Converter {
 		private $consonent = '\x{1000}-\x{1021}';
 		private $ka_group = '\x{1000}-\x{1004}'; // ကဝဂ္
@@ -44,12 +44,14 @@ class Converter {
 			$win_uni = $this->win_uni;
 			$win_ay = $this->win_uni;
 			$win_zg = $this->win_zg;
+			$prf_uni = $this->prf_uni;
 			$zg_correction = $this->zg_correction;
 			$ay_correction = $this->ay_correction;
 			$uni_correction = $this->uni_correction;
 			$uni2zg_order = $this->uni2zg_order;
 			$ay2zg_order = $this->ay2zg_order;
 			$zg2uni_order = $this->zg2uni_order;
+			$prf2uni_order = $this->prf2uni_order;
 			$win2uni_order = $this->win2uni_order;
 			$win2ay_order = $this->win2ay_order;
 			$win2zg_order = $this->win2zg_order;
@@ -123,47 +125,74 @@ class Converter {
 							die();
 */
 							//die(var_dump($english_words));
+
 							if(isset($spelling_check) && false !== $spelling_check){
-								//die('this is true');
-								include('./dic/dictionary_array.php');
 								$stripped_text = strip_tags($text);
 								$paragraph = preg_split("/[\s,]+/s", $stripped_text);
 								array_walk($paragraph, 'trim_value');
 								$words_array = array_unique($paragraph);
 								array_multisort($words_array);
-								array_walk($words_array, 'space_on_short_words');
-								//die(var_dump($words_array));
-								foreach($words_array as $word){
-									if( !empty($word) ){
-									//$single_letter = preg_match('/^[\d\w]$/s', $word, $match);
-									$plural_ies = preg_match('/(\w+)(ies)|(\w+)(s)/', $word, $plural_match_ies);
-									//$plural_s = preg_match('/\w+(s)$/s', $word, $plural_match_s);
 
-										if(!empty($plural_match_ies)){
-											array_walk($plural_match_ies, 'space_on_short_words');
-											//var_dump($plural_match_ies);
-											if($plural_match_ies[2] == ' ies '){
-												$singular = $plural_match_ies[1].'y';
-											}elseif($plural_match_ies[4] == ' s '){
-												$singular = $plural_match_ies[3];
+								if(function_exists('enchant_broker_init')){
+									$tag = 'en_US';
+									$r = enchant_broker_init();
+									$bprovides = enchant_broker_describe($r);
+									$dicts = enchant_broker_list_dicts($r);
+									if (enchant_broker_dict_exists($r,$tag)) {
+										$d = enchant_broker_request_dict($r, $tag);
+										$dprovides = enchant_dict_describe($d);
+											foreach($words_array as $word){
+												if( !empty($word) ){
+													$wordcorrect = enchant_dict_check($d, $word);
+													if ($wordcorrect) {
+															$word = preg_replace('/^\d+$/u','"$0"',$word);
+															$word = preg_replace('/^[\d\w]{1,3}$/u',' $0 ',$word);
+															$english_words_array[$word] = $word;
+													}
+												}
 											}
 
-											if( in_array($singular, $dictionary) || in_array(strtolower($singular), $dictionary)){
-											$plural_array[$plural_match_ies[0]] = $plural_match_ies[0];
-											}
-										}
 
-									if(in_array($word, $dictionary) || in_array(strtolower($word), $dictionary)){
-										//die("this is true");
-										$english_words_array[$word] = $word;
+										enchant_broker_free_dict($d);
+									}
+									enchant_broker_free($r);
+
+
+								}/*elseif(function_exists('pspell_check')){
+									foreach($words_array as $word){
+										if( !empty($word) ){
+
+											}
+									}
+								}*/else{
+									include('./dic/dictionary_array.php');
+
+									array_walk($words_array, 'space_on_short_words');
+									foreach($words_array as $word){
+										if( !empty($word) ){
+										$plural_ies = preg_match('/(\w+)(ies)|(\w+)(s)/', $word, $plural_match_ies);
+
+											if(!empty($plural_match_ies)){
+												array_walk($plural_match_ies, 'space_on_short_words');
+												if($plural_match_ies[2] == ' ies '){
+													$singular = $plural_match_ies[1].'y';
+												}elseif($plural_match_ies[4] == ' s '){
+													$singular = $plural_match_ies[3];
+												}
+
+												if( in_array($singular, $dictionary) || in_array(strtolower($singular), $dictionary)){
+												$plural_array[$plural_match_ies[0]] = $plural_match_ies[0];
+												}
+											}
+
+										if(in_array($word, $dictionary) || in_array(strtolower($word), $dictionary)){
+											$english_words_array[$word] = $word;
+											}
 										}
 									}
 								}
-								//die();
-								//array_walk_recursive($english_words_array, 'trim_value');
-								//die(var_dump($english_words_array));
-								//die(var_dump($singular_array));
-								//die(var_dump($plural_array));
+
+							//	die(var_dump($english_words_array));
 								$english_words = array();
 								if(isset($english_words_array) && !empty($english_words_array)){
 								$english_words = $english_words_array;
@@ -172,8 +201,10 @@ class Converter {
 								$english_words = array_merge($english_words, $plural_array);
 								}
 
+								$english_words = array_unique($english_words);
+								//die(var_dump($english_words));
 							}
-							//die(var_dump($english_words));
+
 							$generated_array = array();
 							if(true !== $text_only){
 								preg_match_all('/<(.*)>/uU',$text, $html_tags);
@@ -200,7 +231,7 @@ class Converter {
 								if(!empty($exceps_array)){
 
 									foreach($exceps_array as $ignore_list){
-										if(!empty($ignore_list)){
+										if( !empty($ignore_list) && mb_strlen($ignore_list) > 3 ){
 										$generated_array[$ignore_list] = $ignore_list;
 										$user_content .= "$ignore_list\n";
 										}
@@ -210,8 +241,8 @@ class Converter {
 							}
 									//die($user_content);
 							if(isset($suggested) && true === $suggested){
-								if( file_exists('./dic/userdic.dic') ){
-									$user_dic = file('./dic/userdic.dic', FILE_SKIP_EMPTY_LINES);
+								if( file_exists('./user/userdic.dic') ){
+									$user_dic = file('./user/userdic.dic', FILE_SKIP_EMPTY_LINES);
 									array_walk($user_dic,'trim_value');
 									foreach($user_dic as $user_word){
 										if(!empty($user_word)){
@@ -224,7 +255,7 @@ class Converter {
 
 								if(!empty($user_content)){
 									//die(var_dump($user_content));
-									$userdic_file = './dic/userdic.dic';
+									$userdic_file = './user/userdic.dic';
 									$uaf = fopen($userdic_file, 'w') or die("File is not writable or directory does not exist.");
 											fwrite($uaf, $user_content);
 											fclose($uaf);
@@ -246,13 +277,13 @@ class Converter {
 						}else{
 						$final_text = strtr($text, $input_output);
 						}
-
+						//die(var_dump($order));
 						foreach (array_merge($order, $output_correction, $output_zwsp) as $key => $value) {
-							$final_text = preg_replace('/'.$key.'/u', $value, $final_text);
+							$final_text = preg_replace('/'.$key.'/us', $value, $final_text);
 						}
 					}else{
-					foreach (array_merge($output_correction, $output_zwsp) as $key => $value) {
-							$final_text = preg_replace('/'.$key.'/u', $value, $text);
+						foreach (array_merge($output_correction, $output_zwsp) as $key => $value) {
+							$final_text = preg_replace('/'.$key.'/us', $value, $text);
 						}
 					}
 
@@ -294,4 +325,4 @@ class Converter {
 
 }
 
-
+?>

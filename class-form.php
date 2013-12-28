@@ -6,7 +6,7 @@ class FormSubmit{
 	private $filename;
 	private $upload_error;
 	private $upload_error_message = array();
-	private $mime_type = array('text/javascript', 'text/css', 'text/html', 'application/x-php', 'text/x-gettext-translation', 'text/plain', 'text/x-sql');
+	private $mime_type = array('text/javascript', 'text/css', 'text/html', 'application/x-php', 'text/x-gettext-translation', 'text/plain', 'text/x-sql','text/xml');
 	private $source_file = array();
 	public $converted = array();
 	private $converter;
@@ -109,41 +109,56 @@ class FormSubmit{
 		}else{
 		$exceptions = null;
 		}
-		if($ofont == 'ay'){
-			$converted['ofont_family'] = "Ayar";
-			$converted['ochecked'] = 'ay';
-			}
-		if($ofont == 'zg'){
-			$converted['ofont_family'] = "Zawgyi-One";
-			$converted['ochecked'] = 'zg';
-			}
-		if($ofont == 'uni'){
-			$converted['ofont_family'] = "Padauk, MyanmarText, Tharlon, Myanmar3";
-			$converted['ochecked'] = 'uni';
-			}
-		if($ifont == 'ay'){
-			$converted['ifont_family'] = "Ayar";
-			$converted['ichecked'] = 'ay';
-			}
-		if($ifont == 'zg'){
-			$converted['ifont_family'] = "Zawgyi-One";
-			$converted['ichecked'] = 'zg';
-			}
-		if($ifont == 'uni'){
-			$converted['ifont_family'] = "Padauk, MyanmarText, Tharlon, Myanmar3";
-			$converted['ichecked'] = 'uni';
-			}
-		if($ifont == 'win'){
-			$converted['ifont_family'] = "Win Innwa";
-			$converted['ichecked'] = 'win';
-			$encoding = 'ascii';
-			}else{
-			$encoding = '';
-			}
-		if($ifont == ''){
-			//$ifont_family = "Padauk, MyanmarText, Tharlon, Myanmar3";
-			$converted['ichecked'] = 'auto';
-			}
+
+		switch ($ifont) {
+			case 'ay':
+				$converted['ifont_family'] = "Ayar";
+				$converted['ichecked'] = 'ay';
+				$encoding = '';
+				break;
+			case 'zg':
+				$converted['ifont_family'] = "Zawgyi-One";
+				$converted['ichecked'] = 'zg';
+				$encoding = '';
+				break;
+			case 'uni':
+				$converted['ifont_family'] = "Padauk, Ayar Uni, MyanmarText, Tharlon, Myanmar3";
+				$converted['ichecked'] = 'uni';
+				$encoding = '';
+				break;
+			case 'win':
+				$converted['ifont_family'] = "win innwa";
+				$converted['ichecked'] = 'win';
+				$encoding = 'ascii';
+				break;
+			case 'prf':
+				$converted['ifont_family'] = "private font";
+				$converted['ichecked'] = 'prf';
+				$encoding = '';
+				break;
+			default:
+				$encoding = '';
+				$converted['ichecked'] = 'auto';
+				break;
+		}
+		switch ($ofont) {
+			case 'ay':
+				$converted['ofont_family'] = "Ayar";
+				$converted['ochecked'] = 'ay';
+				break;
+			case 'zg':
+				$converted['ofont_family'] = "Zawgyi-One";
+				$converted['ochecked'] = 'zg';
+				break;
+			case 'uni':
+				$converted['ofont_family'] = "Padauk, MyanmarText, Tharlon, Myanmar3";
+				$converted['ochecked'] = 'uni';
+				break;
+			default:
+				# code...
+				break;
+		}
+
 			$options = array(
 			'input_font' => $ifont,
 			'output' => $ofont,
@@ -257,7 +272,7 @@ class FormSubmit{
 								$source_file['file'] = $filename['tmp_name'];
 								$source_file['type'] = $check_type;
 							}else{
-								$type_message = "Your file is invalid, Please choose different file type!";
+								$type_message = "Your file is invalid type($check_type), Please choose different file type!";
 							}
 						$source_file['type_error'] = $type_message;
 					} else {
@@ -291,4 +306,4 @@ class FormSubmit{
 }
 $form = new FormSubmit();
 
-
+?>
