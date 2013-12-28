@@ -1,28 +1,56 @@
-#wrap{
-	float: none;
-	clear: both;
-	position:absolute;
-	bottom:0px;
+/* Sticky footer styles
+-------------------------------------------------- */
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
 }
-.cvcontainer {
-	position:relative;
-	width: 40%;
-	margin: auto;
-	padding: auto;
-	text-align: center;
-	background: #000;
-	background: rgba(0,0,0,0.0);
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
 }
-#coverflow{
-	position: absolute;
-	padding: 30px 20px;
-	margin: auto;
+
+/* Set the fixed height of the footer here */
+footer, #footer {
+	margin-top: 25px;
+  height: 60px;
+  background-color: #222222;
 }
-a {
-	color: #fff;
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+
+.container .credit {
+  margin: 20px 0;
 }
-#rawrap {
-	width: 30%;
-	position:relative;
-	margin:auto;
+
+header{
+  background-color: #222222;
 }
+.gray-light {
+	color: #ddd;
+}
+#myTabContent{
+	margin-top: 20px;
+}
+
+.no-js .textareaH{
+height: 200px;
+}
+.hide-ascii-controls{
+display:none;
+}
+@import url('http://webfonts.myanmapress.com/css.php?font=ayar,padauk,zawgyi,uni');
+@font-face {font-family: "Win Innwa"; font-style: normal; font-weight: normal; src: local("Win Innwa"), url(".fonts/winnwa.ttf") format("truetype");}
+
