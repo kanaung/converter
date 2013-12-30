@@ -33,6 +33,10 @@ class Converter {
 		require('./converter_array.php');
 	}
 
+//	public function __set($name, $value)
+	//	{
+ //       $this->$name = (array) $value;
+ //   }
 	public function convert($text, $options = array('output'=>'uni', 'input_font'=>'','encoding'=>'','text-only'=>false,'exceptions'=>''))
 		{
 			$ay_uni = $this->ay_uni;
@@ -45,18 +49,40 @@ class Converter {
 			$win_ay = $this->win_uni;
 			$win_zg = $this->win_zg;
 			$prf_uni = $this->prf_uni;
+			$knk_uni = $this->knk_uni;
+			$mym_uni = $this->mym_uni;
+			$nld_uni = $this->nld_uni;
+			$prf_ay = $this->prf_uni;
+			$knk_ay = $this->knk_uni;
+			$mym_ay = $this->mym_uni;
+			$nld_ay = $this->nld_uni;
+			$prf_zg = $this->prf_zg;
+			$knk_zg = $this->knk_zg;
+			$mym_zg = $this->mym_zg;
+			$nld_zg = $this->nld_zg;
 			$zg_correction = $this->zg_correction;
 			$ay_correction = $this->ay_correction;
 			$uni_correction = $this->uni_correction;
 			$uni2zg_order = $this->uni2zg_order;
 			$ay2zg_order = $this->ay2zg_order;
+			$win2zg_order = $this->win2zg_order;
+			$prf2zg_order = $this->prf2zg_order;
+			$nld2zg_order = $this->nld2zg_order;
+			$knk2zg_order = $this->knk2zg_order;
+			$mym2zg_order = $this->mym2zg_order;
+			$ay2uni_order = $this->ay2uni_order;
 			$zg2uni_order = $this->zg2uni_order;
 			$prf2uni_order = $this->prf2uni_order;
 			$win2uni_order = $this->win2uni_order;
+			$nld2uni_order = $this->nld2uni_order;
+			$knk2uni_order = $this->knk2uni_order;
+			$mym2uni_order = $this->mym2uni_order;
+			$prf2ay_order = $this->prf2ay_order;
+			$nld2ay_order = $this->nld2ay_order;
+			$knk2ay_order = $this->knk2ay_order;
+			$mym2ay_order = $this->mym2ay_order;
 			$win2ay_order = $this->win2ay_order;
-			$win2zg_order = $this->win2zg_order;
 			$zg2ay_order = $this->zg2ay_order;
-			$ay2uni_order = $this->ay2uni_order;
 			$uni2ay_order = $this->uni2ay_order;
 			$ay_zwsp = $this->ay_zwsp;
 			$zg_zwsp = $this->zg_zwsp;
@@ -64,14 +90,15 @@ class Converter {
 
 			foreach($options as $option_name  => $option_value){
 				$$option_name = $option_value;
-				//var_dump($$option_name);
+
 				}
-//die();
+
 		if($input_font === '' || $input_font == 'auto'){
 			$input = $this->enc_test($text);
 			} else {
 			$input = $input_font;
 			}
+
 
 			$output_correction = ${$output.'_correction'};
 			$output_zwsp = ${$output.'_zwsp'};
@@ -158,13 +185,7 @@ class Converter {
 									enchant_broker_free($r);
 
 
-								}/*elseif(function_exists('pspell_check')){
-									foreach($words_array as $word){
-										if( !empty($word) ){
-
-											}
-									}
-								}*/else{
+								}else{
 									include('./dic/dictionary_array.php');
 
 									array_walk($words_array, 'space_on_short_words');
@@ -192,7 +213,7 @@ class Converter {
 									}
 								}
 
-							//	die(var_dump($english_words_array));
+
 								$english_words = array();
 								if(isset($english_words_array) && !empty($english_words_array)){
 								$english_words = $english_words_array;
@@ -202,7 +223,6 @@ class Converter {
 								}
 
 								$english_words = array_unique($english_words);
-								//die(var_dump($english_words));
 							}
 
 							$generated_array = array();
@@ -225,9 +245,9 @@ class Converter {
 							}
 							$user_content = "";
 							if( isset($exceptions) ){
-								//var_dump($exceptions);
+
 								$exceps_array = explode(',',$exceptions);
-								//die(var_dump($exceps_array));
+
 								if(!empty($exceps_array)){
 
 									foreach($exceps_array as $ignore_list){
@@ -237,9 +257,8 @@ class Converter {
 										}
 									}
 								}
-								//die(var_dump($exceptions_array));
+
 							}
-									//die($user_content);
 							if(isset($suggested) && true === $suggested){
 								if( file_exists('./user/userdic.dic') ){
 									$user_dic = file('./user/userdic.dic', FILE_SKIP_EMPTY_LINES);
@@ -254,13 +273,13 @@ class Converter {
 							}
 
 								if(!empty($user_content)){
-									//die(var_dump($user_content));
+
 									$userdic_file = './user/userdic.dic';
 									$uaf = fopen($userdic_file, 'w') or die("File is not writable or directory does not exist.");
 											fwrite($uaf, $user_content);
 											fclose($uaf);
 								}
-							//die(var_dump($generated_array));
+
 							$conv_array = $input_output;
 							if(!empty($generated_array)){
 							$conv_array = array_merge($generated_array, $conv_array);
@@ -268,16 +287,10 @@ class Converter {
 							if(isset($english_words) && !empty($english_words)){
 							$conv_array = array_merge($english_words, $conv_array);
 							}
-							//$conv_array = array_unique($conv_array);
-						//die(var_dump($input_output));
-						//var_dump($english_words);
-						//die(var_dump($conv_array));
 						$final_text = strtr($text, $conv_array);
-						//die(var_dump($final_text));
 						}else{
 						$final_text = strtr($text, $input_output);
 						}
-						//die(var_dump($order));
 						foreach (array_merge($order, $output_correction, $output_zwsp) as $key => $value) {
 							$final_text = preg_replace('/'.$key.'/us', $value, $final_text);
 						}
@@ -286,19 +299,9 @@ class Converter {
 							$final_text = preg_replace('/'.$key.'/us', $value, $text);
 						}
 					}
-
-				}
-
-/*$info = sprintf(
-        " \nPage : %s\nHTML size : %d bytes\n ",
-        $_SERVER['REQUEST_URI'],
-        mb_strlen($final_text, 'UTF-8')
-    );
-    *
-    * */
+			}
 
 		$this->text = $final_text;
-//	}
 		return $this->text;
 	}
 

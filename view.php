@@ -1,38 +1,10 @@
 <?php
 $start = microtime(true);
 require_once('./class-form.php');
-
+	//$form->eng_uni = array('test' =>'test');
 $converted = $form->converted();
 
 
-	if(isset($converted['ichecked'])){
-		$ichecked = $converted['ichecked'];
-	}else{
-		$ichecked = 'ay';
-	}
-	if(isset($converted['ochecked'])){
-		$ochecked = $converted['ochecked'];
-	}else{
-		$ochecked = 'uni';
-	}
-	if(isset($converted['ifont_family'])){
-		$ifontfamily = $converted['ifont_family'];
-	}else{
-		$ifontfamily = 'Ayar';
-	}
-	if(isset($converted['ofont_family'])){
-		$ofontfamily = $converted['ofont_family'];
-	}else{
-		$ofontfamily = "Padauk, MyanmarText, Tharlon, Myanmar3";
-	}
-
-
-	if(isset($converted['output_text'])){
-
-	$output_text = $converted['output_text'];
-	$end = microtime(true);
-	$time = "Converted in ".FormatElapsed($start, $end)." seconds !\n";
-	}
 	if(isset($converted['file_text'])){
 		$filename = $converted['filename'];
 		$file_type = $converted['type'];
@@ -65,14 +37,41 @@ $converted = $form->converted();
 			readfile($output_file);
 			exit;
 	}else{
-	if(isset($converted['error_message'])){
-	$error_message = $converted['error_message'];
-	}
 
-	if(isset($converted['type_error'])){
-	$type_error = $converted['type_error'];
-	}	
-	
+		if(isset($converted['ichecked'])){
+			$ichecked = $converted['ichecked'];
+		}else{
+			$ichecked = 'ay';
+		}
+		if(isset($converted['ochecked'])){
+			$ochecked = $converted['ochecked'];
+		}else{
+			$ochecked = 'uni';
+		}
+		if(isset($converted['ifont_family'])){
+			$ifontfamily = $converted['ifont_family'];
+		}else{
+			$ifontfamily = 'Ayar';
+		}
+		if(isset($converted['ofont_family'])){
+			$ofontfamily = $converted['ofont_family'];
+		}else{
+			$ofontfamily = "Padauk, MyanmarText, Tharlon, Myanmar3";
+		}
+		if(isset($converted['error_message'])){
+		$error_message = $converted['error_message'];
+		}
+
+		if(isset($converted['type_error'])){
+		$type_error = $converted['type_error'];
+		}
+
+		if(isset($converted['output_text'])){
+
+		$output_text = $converted['output_text'];
+		$end = microtime(true);
+		$time = "Converted in ".FormatElapsed($start, $end)." seconds !\n";
+		}
 	}
 
 function FormatElapsed($Start, $End = NULL) {
@@ -88,7 +87,7 @@ function FormatElapsed($Start, $End = NULL) {
 		  return $Result;
 		}
 	$font_options = array(
-		'ifont' => array('ay'=>'Ayar','zg'=>'Zawgyi-One','uni'=>'Myanmar3','win'=>'Win Innwa'),
+		'ifont' => array('ay'=>'Ayar','zg'=>'Zawgyi-One','uni'=>'Myanmar3','win'=>'Win Innwa','nld'=>'NLD1','knk'=>'Kannaka','mym'=>'m-myanmar','prf'=>'Private Font'),
 		'ofont' => array('ay'=>'Ayar','zg'=>'Zawgyi-One','uni'=>'Myanmar3')
 	);
-
+ ?>

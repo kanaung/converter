@@ -53,4 +53,6 @@ display:none;
 }
 @import url('http://webfonts.myanmapress.com/css.php?font=ayar,padauk,zawgyi,uni');
 @font-face {font-family: "Win Innwa"; font-style: normal; font-weight: normal; src: local("Win Innwa"), url(".fonts/winnwa.ttf") format("truetype");}
-
+@font-face {font-family: "NLD1"; font-style: normal; font-weight: normal; src: local("NLD1"), url(".fonts/nld1.ttf") format("truetype");}
+@font-face {font-family: "Kannaka"; font-style: normal; font-weight: normal; src: local("Kannaka"), url(".fonts/kannaka.ttf") format("truetype");}
+@font-face {font-family: "m-myanmar1"; font-style: normal; font-weight: normal; src: local("M-Myanmar1"), url(".fonts/m-myanmar1.ttf") format("truetype");}

@@ -4,61 +4,61 @@
 			$(document).ready(function() {
 				var ifont = $("select#ifont").val();
 
-			if(ifont == 'ay'){
-			$("textarea#input").css("font-family","Ayar");
-			$("div#ascii-controls").addClass('hide-ascii-controls');
-			}
-			if(ifont == 'zg'){
-			$("textarea#input").css("font-family","Zawgyi-One");
-			$("div#ascii-controls").addClass('hide-ascii-controls');
-			}
-			if(ifont == 'uni'){
-			$("textarea#input").css("font-family","Padauk, MyanmarText, Tharlon, Myanmar3");
-			$("div#ascii-controls").addClass('hide-ascii-controls');
-			}
-			if(ifont == 'win'){
-			$("textarea#input").css("font-family","Win Innwa");
-			$("div#ascii-controls").removeClass('hide-ascii-controls');
-			}
+				if(ifont == 'ay'){
+				$("textarea#input").css("font-family","Ayar");
+				$("div#ascii-controls").addClass('hide-ascii-controls');
+				}
+				if(ifont == 'zg'){
+				$("textarea#input").css("font-family","Zawgyi-One");
+				$("div#ascii-controls").addClass('hide-ascii-controls');
+				}
+				if(ifont == 'uni'){
+				$("textarea#input").css("font-family","Padauk, MyanmarText, Tharlon, Myanmar3");
+				$("div#ascii-controls").addClass('hide-ascii-controls');
+				}
+				if(ifont == 'win'){
+				$("textarea#input").css("font-family","Win Innwa");
+				$("div#ascii-controls").removeClass('hide-ascii-controls');
+				}
 			});
 			$("select#ifont").change(function() {
 				var ifont = $("select#ifont").val();
 
-			if(ifont == 'ay'){
-			$("textarea#input").css("font-family","Ayar");
-			$("div#ascii-controls").addClass('hide-ascii-controls');
-			}
-			if(ifont == 'zg'){
-			$("textarea#input").css("font-family","Zawgyi-One");
-			$("div#ascii-controls").addClass('hide-ascii-controls');
-			}
-			if(ifont == 'uni'){
-			$("textarea#input").css("font-family","Padauk, MyanmarText, Tharlon, Myanmar3");
-			$("div#ascii-controls").addClass('hide-ascii-controls');
-			}
-			if(ifont == 'win'){
-			$("textarea#input").css("font-family","Win Innwa");
-			$("div#ascii-controls").removeClass('hide-ascii-controls');
-			}
+				if(ifont == 'ay'){
+				$("textarea#input").css("font-family","Ayar");
+				$("div#ascii-controls").addClass('hide-ascii-controls');
+				}
+				if(ifont == 'zg'){
+				$("textarea#input").css("font-family","Zawgyi-One");
+				$("div#ascii-controls").addClass('hide-ascii-controls');
+				}
+				if(ifont == 'uni'){
+				$("textarea#input").css("font-family","Padauk, MyanmarText, Tharlon, Myanmar3");
+				$("div#ascii-controls").addClass('hide-ascii-controls');
+				}
+				if(ifont == 'win'){
+				$("textarea#input").css("font-family","Win Innwa");
+				$("div#ascii-controls").removeClass('hide-ascii-controls');
+				}
 			});
 
 			$("select#ofont").change(function() {
 				var ofont = $("select#ofont").val();
 				//alert(ofont);
-			if(ofont == 'ay'){
-			$("#output").css("font-family","Ayar");
-			}
-			if(ofont == 'zg'){
-			$("#output").css("font-family","Zawgyi-One");
-			}
-			if(ofont == 'uni'){
-			$("#output").css("font-family","Padauk, MyanmarText, Tharlon, Myanmar3");
-			}
+				if(ofont == 'ay'){
+				$("#output").css("font-family","Ayar");
+				}
+				if(ofont == 'zg'){
+				$("#output").css("font-family","Zawgyi-One");
+				}
+				if(ofont == 'uni'){
+				$("#output").css("font-family","Padauk, MyanmarText, Tharlon, Myanmar3");
+				}
 			});
 
 			$("form#converter").submit(function(){
-			$("#output").empty();
-				});
+				$("#output").empty();
+			});
 
 			//$("input#inputfile").remove();
 

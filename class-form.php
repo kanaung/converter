@@ -10,6 +10,7 @@ class FormSubmit{
 	private $source_file = array();
 	public $converted = array();
 	private $converter;
+	private $conv_array;
 
 	public function __construct(){
 		mb_internal_encoding('UTF-8');
@@ -17,14 +18,11 @@ class FormSubmit{
 		require_once('./class-converter.php');
 
 		$converter = new Converter();
+
 		$this->converter = $converter;
 
-//		if(isset($_POST['submit'])){
 		$file_array = $_FILES;
 		$post_array = $_POST;
-	//	var_dump($post_array);
-
-
 
 			if(isset($post_array['input']) && !empty($post_array['input'])){
 
@@ -32,7 +30,6 @@ class FormSubmit{
 
 			}else{
 				$file = $this->source_file($file_array);
-		//		die(var_dump($file));
 
 				if($file !== false){
 
@@ -40,9 +37,7 @@ class FormSubmit{
 
 				}
 			}
-	//	}
 	}
-
 
 
 	public function converted(){
@@ -131,6 +126,21 @@ class FormSubmit{
 				$converted['ichecked'] = 'win';
 				$encoding = 'ascii';
 				break;
+			case 'nld':
+				$converted['ifont_family'] = "NLD1";
+				$converted['ichecked'] = 'nld';
+				$encoding = 'ascii';
+				break;
+			case 'knk':
+				$converted['ifont_family'] = "Kannaka";
+				$converted['ichecked'] = 'knk';
+				$encoding = 'ascii';
+				break;
+			case 'mym':
+				$converted['ifont_family'] = "m-myanmar1";
+				$converted['ichecked'] = 'mym';
+				$encoding = 'ascii';
+				break;
 			case 'prf':
 				$converted['ifont_family'] = "private font";
 				$converted['ichecked'] = 'prf';
@@ -155,7 +165,8 @@ class FormSubmit{
 				$converted['ochecked'] = 'uni';
 				break;
 			default:
-				# code...
+				$converted['ofont_family'] = "Padauk, MyanmarText, Tharlon, Myanmar3";
+				$converted['ochecked'] = 'uni';
 				break;
 		}
 
