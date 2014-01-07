@@ -243,7 +243,7 @@ class Converter {
 									}
 								}
 							}
-							$user_content = "";
+							$user_content_array = array();
 							if( isset($exceptions) ){
 
 								$exceps_array = explode(',',$exceptions);
@@ -251,9 +251,9 @@ class Converter {
 								if(!empty($exceps_array)){
 
 									foreach($exceps_array as $ignore_list){
-										if( !empty($ignore_list) && mb_strlen($ignore_list) > 3 ){
+										if( !empty($ignore_list) && strlen($ignore_list) > 4 ){
 										$generated_array[$ignore_list] = $ignore_list;
-										$user_content .= "$ignore_list\n";
+										$user_content_array[] = $ignore_list;
 										}
 									}
 								}
@@ -266,14 +266,20 @@ class Converter {
 									foreach($user_dic as $user_word){
 										if(!empty($user_word)){
 											$generated_array[$user_word] = $user_word;
-											$user_content .= "$user_word\n";
+											$user_content_array[] = $user_word;
 										}
 									}
 								}
 							}
 
-								if(!empty($user_content)){
-
+								if(!empty($user_content_array)){
+									$user_content = "";
+									array_walk($user_content_array, 'trim_value');
+									asort($user_content_array);
+									$user_content_array = array_unique($user_content_array);
+									foreach($user_content_array as $phrase){
+										$user_content .= "$phrase\n";
+										}
 									$userdic_file = './user/userdic.dic';
 									$uaf = fopen($userdic_file, 'w') or die("File is not writable or directory does not exist.");
 											fwrite($uaf, $user_content);
