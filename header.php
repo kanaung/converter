@@ -9,7 +9,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet" media="screen">
 	<link rel="stylesheet" href="css/smoothness/jquery-ui-min.css">
-    <link href="css/sticky-footer.css" rel="stylesheet" media="screen">
+    <link href="css/style.css" rel="stylesheet" media="screen">
 <style>
 .bar {
     height: 18px;
