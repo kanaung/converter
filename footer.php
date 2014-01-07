@@ -19,7 +19,7 @@
 
 		<!-- Our main JS file -->
 		<script src="js/script.js"></script>
-		<?php if(isset($error_message) || isset($type_error) || isset($time)){?>
+		<?php if(isset($error_message) || isset($type_error) ){?>
 		<script type="text/javascript">
 			(function($) { // An anonymous function with one parameter named $
 				// Put your plugin code here
@@ -28,6 +28,29 @@
 				});
 			}(jQuery));// Invoke the function with the jQuery object as its argument
 		</script>
+		<?php } elseif(isset($time)){ ?>
+		<script type="text/javascript">
+			(function($) { // An anonymous function with one parameter named $
+				// Put your plugin code here
+				$(document).ready(function(){
+				//$(".alert").alert("close");
+				$('div').removeClass('hide-time');
+
+				});
+			}(jQuery));// Invoke the function with the jQuery object as its argument
+		</script>
+		<style>
+			.hide-time{
+			 display:block;
+				}
+		</style>
+		<?php }else { ?>
+			<style>
+			.hide-time{
+			 display:none;
+				}
+			</style>
+
 		<?php } ?>
 	</body>
 
