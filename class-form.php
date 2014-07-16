@@ -11,9 +11,28 @@ class FormSubmit{
 	public $converted = array();
 	private $converter;
 	private $conv_array;
+	public $font_list;
 
 	public function __construct(){
 		mb_internal_encoding('UTF-8');
+		
+		$files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator('./ext'));
+
+		$rules_files = new RegexIterator($files, '/-rules\.php$/i');
+		
+		foreach ($rules_files as $file) {
+
+		preg_match('/\/ext\/(.*)\/(.*)-rules.php/',$file, $match);
+		$ifont_name[] = $match[2];
+		$ofont_name[] = $match[1];
+		$this->ifont_array[$match[2]] = ucwords($match[2]);
+		$this->ofont_array[$match[1]] = ucwords($match[1]);
+		$font_list[] = array($match[1] => $match[2]);
+
+		}
+		$font_list = call_user_func_array('array_merge_recursive', $font_list);
+
+		$this->font_list = $font_list;
 
 		require_once('./class-converter.php');
 
@@ -62,8 +81,7 @@ class FormSubmit{
 		  'error_num' => int 0
 
 		*/
-		 // var_dump($file_data);
-		 // var_dump($post_array);
+
 		  $converted = array();
 			if(isset($post_array['input'])){
 			$input = $post_array['input'];
@@ -77,7 +95,7 @@ class FormSubmit{
 		if(isset($post_array['ofont'])){
 		$ofont = $post_array['ofont'];
 		}else{
-		$ofont = 'uni';
+		$ofont = 'unicode';
 		}
 		if(isset($post_array['ifont']) && $post_array['ifont'] != "auto"){
 		$ifont = $post_array['ifont'];
@@ -105,70 +123,24 @@ class FormSubmit{
 		$exceptions = null;
 		}
 
-		switch ($ifont) {
-			case 'ay':
-				$converted['ifont_family'] = "Ayar";
-				$converted['ichecked'] = 'ay';
+		if (in_array($ifont, $this->ifont_array)) {
+				$converted['ifont_family'] = ucwords($ifont);
+				$converted['ichecked'] = $ifont;
 				$encoding = '';
-				break;
-			case 'zg':
-				$converted['ifont_family'] = "Zawgyi-One";
-				$converted['ichecked'] = 'zg';
-				$encoding = '';
-				break;
-			case 'uni':
-				$converted['ifont_family'] = "Padauk, Ayar Uni, MyanmarText, Tharlon, Myanmar3";
-				$converted['ichecked'] = 'uni';
-				$encoding = '';
-				break;
-			case 'win':
-				$converted['ifont_family'] = "win innwa";
-				$converted['ichecked'] = 'win';
-				$encoding = 'ascii';
-				break;
-			case 'nld':
-				$converted['ifont_family'] = "NLD1";
-				$converted['ichecked'] = 'nld';
-				$encoding = 'ascii';
-				break;
-			case 'knk':
-				$converted['ifont_family'] = "Kannaka";
-				$converted['ichecked'] = 'knk';
-				$encoding = 'ascii';
-				break;
-			case 'mym':
-				$converted['ifont_family'] = "m-myanmar1";
-				$converted['ichecked'] = 'mym';
-				$encoding = 'ascii';
-				break;
-			case 'prf':
-				$converted['ifont_family'] = "private font";
-				$converted['ichecked'] = 'prf';
-				$encoding = '';
-				break;
-			default:
-				$encoding = '';
-				$converted['ichecked'] = 'auto';
-				break;
+		}else{
+				$converted['ifont_family'] = "Padauk, MyanmarText, Tharlon, Myanmar3";
+				$converted['ichecked'] = 'myanmar3';
 		}
-		switch ($ofont) {
-			case 'ay':
-				$converted['ofont_family'] = "Ayar";
-				$converted['ochecked'] = 'ay';
-				break;
-			case 'zg':
-				$converted['ofont_family'] = "Zawgyi-One";
-				$converted['ochecked'] = 'zg';
-				break;
-			case 'uni':
+		
+		if (in_array($ofont, $this->ofont_array)) {
+				$converted['ofont_family'] = ucwords($ofont);
+				$converted['ochecked'] = $ofont;
+				$encoding = '';
+		}else{
 				$converted['ofont_family'] = "Padauk, MyanmarText, Tharlon, Myanmar3";
-				$converted['ochecked'] = 'uni';
-				break;
-			default:
-				$converted['ofont_family'] = "Padauk, MyanmarText, Tharlon, Myanmar3";
-				$converted['ochecked'] = 'uni';
-				break;
+				$converted['ochecked'] = 'myanmar3';
 		}
+
 
 			$options = array(
 			'input_font' => $ifont,

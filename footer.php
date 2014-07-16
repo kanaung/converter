@@ -37,6 +37,7 @@
 				$('div').removeClass('hide-time');
 
 				});
+
 			}(jQuery));// Invoke the function with the jQuery object as its argument
 		</script>
 		<style>
@@ -52,6 +53,41 @@
 			</style>
 
 		<?php } ?>
+		<script type="text/javascript">
+			(function($) { // An anonymous function with one parameter named $
+				// Put your plugin code here
+				var result = [];
+				
+				function loop_object(d,e,f)
+					{
+						for(var key in d)
+						{
+							if(d.hasOwnProperty(key))
+							{
+								if(typeof d[key] == "object")
+								{
+									loop_object(d[key],e,key);
+								}
+								else
+								{
+									if(d[key]==e) //found is set for not overwriting first occurence
+									{
+										result.push(f); //push key into array
+									}
+								}
+							}
+						}
+					}
+				$("select#ifont").change(function() {
+				var ifont = $("select#ifont").val();
+				var font_list =<?php echo json_encode($font_list); ?>;
+				loop_object(font_list,ifont,'');
+				console.log(result.join());
+				result = []; //resetting array for next time usage without reloading page
+				//alert(result);
+				});
+			}(jQuery));// Invoke the function with the jQuery object as its argument
+		</script>
 	</body>
 
 </html>

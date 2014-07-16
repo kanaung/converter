@@ -3,7 +3,9 @@ $start = microtime(true);
 require_once('./class-form.php');
 	//$form->eng_uni = array('test' =>'test');
 $converted = $form->converted();
-
+$font_list = $form->font_list;
+$ifont_array = array_unique(call_user_func_array('array_merge_recursive',array_values($font_list)));
+$ofont_array = array_keys($font_list);
 
 	if(isset($converted['file_text'])){
 		$filename = $converted['filename'];
@@ -86,8 +88,10 @@ function FormatElapsed($Start, $End = NULL) {
 
 		  return $Result;
 		}
+
+	
 	$font_options = array(
-		'ifont' => array('ay'=>'Ayar','zg'=>'Zawgyi-One','uni'=>'Myanmar3','win'=>'Win Innwa','nld'=>'NLD1','knk'=>'Kannaka','mym'=>'m-myanmar','prf'=>'Private Font'),
-		'ofont' => array('ay'=>'Ayar','zg'=>'Zawgyi-One','uni'=>'Myanmar3')
+		'ifont' => $ifont_array,
+		'ofont' => $ofont_array
 	);
  ?>

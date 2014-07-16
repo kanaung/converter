@@ -47,11 +47,13 @@
 				<select name="ifont" id="ifont">
 					<?php
 
-					foreach($font_options['ifont'] as $id => $name){
-							if(isset($ichecked) && $ichecked == $id){
-							echo "<option value='$id' selected='selected'>$name</option>";
+					foreach($font_options['ifont'] as $name){
+							if(isset($ichecked) && $ichecked == $name){
+							echo "<option value='$name' id='$name' selected='selected'>".ucwords($name)."</option>";
+							}elseif($name == 'ayar'){
+							echo "<option value='$name' id='$name' selected='selected'>".ucwords($name)."</option>";
 							}else{
-							echo "<option value='$id'>$name</option>";
+							echo "<option value='$name' id='$name'>".ucwords($name)."</option>";
 							}
 					}
 					?>
@@ -70,11 +72,13 @@
 				<label for="ofont" class="control-label">Select Output Font : </label>
 				<select name="ofont" id="ofont">
 					<?php
-					foreach($font_options['ofont'] as $id => $name){
-							if(isset($ochecked) && $ochecked == $id){
-							echo "<option value='$id' selected='selected'>$name</option>";
+					foreach($font_options['ofont'] as $name){
+							if(isset($ochecked) && $ochecked == $name){
+							echo "<option value='$name' id='$name' selected='selected'>".ucwords($name)."</option>";
+							}elseif($name == 'myanmar3'){
+							echo "<option value='$name' id='$name' selected='selected'>".ucwords($name)."</option>";
 							}else{
-							echo "<option value='$id'>$name</option>";
+							echo "<option value='$name' id='$name'>".ucwords($name)."</option>";
 							}
 					}
 					?>
@@ -119,13 +123,13 @@
 				<select name="ifont" id="ifont">
 					<?php
 
-					foreach($font_options['ifont'] as $id => $name){
-							if(isset($ichecked) && $ichecked == $id){
-							echo "<option value='$id' id='$id' selected='selected'>$name</option>";
-							}elseif($id == 'ay'){
-							echo "<option value='$id' id='$id' selected='selected'>$name</option>";
+					foreach($font_options['ifont'] as $name){
+							if(isset($ichecked) && $ichecked == $name){
+							echo "<option value='$name' id='$name' selected='selected'>".ucwords($name)."</option>";
+							}elseif($name == 'ayar'){
+							echo "<option value='$name' id='$name' selected='selected'>".ucwords($name)."</option>";
 							}else{
-							echo "<option value='$id' id='$id'>$name</option>";
+							echo "<option value='$name' id='$name'>".ucwords($name)."</option>";
 							}
 					}
 					?>
@@ -138,13 +142,13 @@
 				<div class="input-group">
 				<select name="ofont" id="ofont">
 					<?php
-					foreach($font_options['ofont'] as $id => $name){
-							if(isset($ochecked) && $ochecked == $id){
-							echo "<option value='$id' id='$id' selected='selected'>$name</option>";
-							}elseif($id == 'uni'){
-							echo "<option value='$id' id='$id' selected='selected'>$name</option>";
+					foreach($font_options['ofont'] as $name){
+							if(isset($ochecked) && $ochecked == $name){
+							echo "<option value='$name' id='$name' selected='selected'>".ucwords($name)."</option>";
+							}elseif($name == 'myanmar3'){
+							echo "<option value='$name' id='$name' selected='selected'>".ucwords($name)."</option>";
 							}else{
-							echo "<option value='$id' id='$id'>$name</option>";
+							echo "<option value='$name' id='$name'>".ucwords($name)."</option>";
 							}
 					}
 					?>

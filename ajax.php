@@ -7,12 +7,12 @@ $converted = $form->converted();
 	if(isset($converted['ichecked'])){
 		$ichecked = $converted['ichecked'];
 	}else{
-		$ichecked = 'ay';
+		$ichecked = 'ayar';
 	}
 	if(isset($converted['ochecked'])){
 		$ochecked = $converted['ochecked'];
 	}else{
-		$ochecked = 'uni';
+		$ochecked = 'unicode';
 	}
 	if(isset($converted['ifont_family'])){
 		$ifontfamily = $converted['ifont_family'];

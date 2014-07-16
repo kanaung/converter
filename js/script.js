@@ -4,103 +4,53 @@ $(function () {
 			$("body").removeClass('no-js');
 			$(document).ready(function() {
 				var ifont = $("select#ifont").val();
+				$("#input").css("font-family",ifont);
 				switch(ifont) {
-					case 'ay':
-						$("#input").css("font-family","Ayar");
-						$("div#ascii-controls").addClass('hide-ascii-controls');
-					break;
-					case 'zg':
-						$("#input").css("font-family","Zawgyi-One");
-						$("div#ascii-controls").addClass('hide-ascii-controls');
-					break;
-					case 'uni':
-						$("#input").css("font-family","Padauk, MyanmarText, Tharlon, Myanmar3");
-						$("div#ascii-controls").addClass('hide-ascii-controls');
-					break;
-					case 'win':
-						$("#input").css("font-family","Win Innwa");
+					case 'win innwa':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
-					case 'mym':
-						$("#input").css("font-family","m-myanmar, M-Myanmar1");
+					case 'm-myanmar':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
-					case 'knk':
-						$("#input").css("font-family","Kannaka");
+					case 'kannaka':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
-					case 'nld':
-						$("#input").css("font-family","NLD1");
+					case 'nld1':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
-					break;
+					break;						
 					default:
-						$("#input").css("font-family","Ayar");
+						$("#input").css("font-family","Myanmar3, Tharlon, Padauk");
 					break;
 				}
+				var ofont = $("select#ofont").val();
+				$("#output").css("font-family",ofont);
 			});
 			$("select#ifont").change(function() {
 				var ifont = $("select#ifont").val();
+				$("#input").css("font-family",ifont);
 				switch(ifont) {
-					case 'ay':
-						$("#input").css("font-family","Ayar");
-						$("div#ascii-controls").addClass('hide-ascii-controls');
-					break;
-					case 'zg':
-						$("#input").css("font-family","Zawgyi-One");
-						$("div#ascii-controls").addClass('hide-ascii-controls');
-					break;
-					case 'uni':
-						$("#input").css("font-family","Padauk, MyanmarText, Tharlon, Myanmar3");
-						$("div#ascii-controls").addClass('hide-ascii-controls');
-					break;
-					case 'win':
-						$("#input").css("font-family","Win Innwa");
+					case 'win innwa':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
-					case 'mym':
-						$("#input").css("font-family","m-myanmar1");
+					case 'm-myanmar':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
-					case 'knk':
-						$("#input").css("font-family","Kannaka");
+					case 'kannaka':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
-					case 'nld':
-						$("#input").css("font-family","NLD1");
+					case 'nld1':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
 					default:
-						$("#input").css("font-family","Ayar");
+						$("#input").css("font-family","Myanmar3, Tharlon, Padauk");
 					break;
 				}
 			});
 
 			$("select#ofont").change(function() {
 				var ofont = $("select#ofont").val();
-				//alert(ofont);
-				switch(ofont) {
-					case 'ay':
-						$("#output").css("font-family","Ayar");
-					break;
-					case 'zg':
-						$("#output").css("font-family","Zawgyi-One");
-					break;
-					case 'uni':
-						$("#output").css("font-family","Padauk, MyanmarText, Tharlon, Myanmar3");
-					break;
-					case 'mym':
-						$("#output").css("font-family","m-myanmar1");
-					break;
-					case 'knk':
-						$("#output").css("font-family","Kannaka");
-					break;
-					case 'nld':
-						$("#output").css("font-family","NLD1");
-					break;
-					default:
-						$("#output").css("font-family","Ayar");
-					break;
-				}
+				$("#output").css("font-family",ofont);
+
 			});
 
 			$("form#converter").submit(function(){
@@ -109,6 +59,8 @@ $(function () {
 				ajaxStart: function() { $(this).show(); },
 				ajaxStop: function() { $(this).hide(); }
 				});
+				var ofont = $("select#ofont").val();
+				$("#output").css("font-family",ofont);
 			});
 
 			//$("input#inputfile").remove();
