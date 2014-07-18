@@ -50,11 +50,15 @@ $(document).ready(function()
 	        }
 	    });
 <<<<<<< HEAD
+<<<<<<< HEAD
 	    $('#input').focus(function(e)
     	{
     		$(this).select();
     	});
     	$('#output').focus(function(e)
+=======
+	    $('#output').focus(function(e)
+>>>>>>> origin/master
 =======
 	    $('#output').focus(function(e)
 >>>>>>> origin/master
