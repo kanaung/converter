@@ -229,8 +229,8 @@
 							<li>Web URI: http://converter.myanmapress.com</li>
 							<li>Description: Use to convert ASCII and Unicode fonts vice verse.</li>
 							<li>Version: 2.0</li>
-							<li>Author: Sithu Thwin</li>
-							<li>Author URI: http://www.thwin.net/</li>
+							<li>Author: Kanaung Development Group</li>
+							<li>Author URI: https://github.com/kanaung/converter/</li>
 							<li>License: GPLv2 or later</li>
 						</ul>
 						<hr/>
