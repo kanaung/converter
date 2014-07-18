@@ -76,9 +76,7 @@
 							</div>
 							<div class="panel-body">
 								<div class="zero-clipboard">
-									<span class="btn-clipboard" data-clipboard-target="output">
-									Copy
-									</span>
+									<span class="btn-clipboard" data-clipboard-target="output">Copy</span>
 								</div>
 								<textarea class="form-control" rows="7" name="output" id="output" style="font-family:<?php echo $ofontfamily;?>"></textarea>
 								<br/>
