@@ -12,10 +12,10 @@
 
 	<nav class="navbar navbar-inverse" role="navigation">
 		<ul class="nav navbar-nav nav-pills">
-			<li><a href="#home" data-toggle="tab">Home</a></li>
-			<li><a href="#uploadsect" data-toggle="tab">Upload</a></li>
-			<li><a href="#about" data-toggle="tab">About</a></li>
-			<li><a href="#help" data-toggle="tab">Help</a></li>
+			<li><a href="#home" data-toggle="tab"><span class="glyphicon glyphicon-home"> Home</span></a></li>
+			<li><a href="#uploadsect" data-toggle="tab"><span class="glyphicon glyphicon-upload"> Upload</span></a></li>
+			<li><a href="#about" data-toggle="tab"><span class="glyphicon glyphicon-info-sign"> About</span></a></li>
+			<li><a href="#help" data-toggle="tab"><span class="glyphicon glyphicon-question-sign"> Help</span></a></li>
 		</ul>
 	</nav>
 	</div>
@@ -87,8 +87,19 @@
 			</fieldset>
 			</div>
 			<div class="clearfix visible-xs"></div>
-			<fieldset id="control-set">
-			<legend>Controls</legend>
+			<fieldset id="control-set1">
+			
+			<div id="controls">
+				<div class="input-groups">
+					<label for="en_zwsp" class="control-label checkbox-inline">
+					<input type="checkbox" name="en_zwsp" id="en_zwsp">
+					 Zero-Width-Space</label>
+					 <p class="help-block">Selecting this will add Zero-Width-Space unicode character according to Myanmar word break rules.</p>			
+				</div>
+			</div>
+			</fieldset>
+			<fieldset id="control-set2">
+			
 			<div id="ascii-controls">
 				<div class="input-groups">
 					<label for="spelling_check" class="control-label checkbox-inline">
@@ -99,15 +110,15 @@
 					 Text only input</label>
 					 <label for="suggested" class="control-label checkbox-inline">
 					<input type="checkbox" name="suggested" id="suggested">
-					Use user suggested words list. <span class="alert alert-danger">Use with care!</span></label>
+					Use user suggested words list. <span class="text-danger">Use with care!</span></label>
 				</div>
 			  <div class="input-group">
 				<label for="exceptions">Suggest</label>
 				<input type="text" name="exceptions" id="exceptions" class="form-control">
-				<p class="help-block">Enter words list seperated by comma to ignore in convertion! If your word is less than 4 letters, please use atleast 2 words combined. <br>For Example: if your want to ignore the word "you" or "I" from the sentence "I love you.", use "I love" or "love you." or the whole sentence "I love you."</p>
+				<p class="help-block">Enter words list seperated by comma to ignore in convertion! If your word is less than 4 letters, please use at least 2 words combined. <br>For Example: if your want to ignore the word "you" or "I" from the sentence "I love you.", use "I love" or "love you." or the whole sentence "I love you."</p>
 			  </div>
 			</div>
-			<button type="submit" name="submit" id="submit" class="btn btn-primary">Convert</button>
+			<input type="submit" name="submit" id="submit" class="btn btn-primary" value="Convert">
 			</fieldset>
 		</form>
 		</div>
@@ -120,7 +131,7 @@
 			<fieldset id="input-set" class="col-xs-6">
 			<legend>Input</legend>
 				<div class="input-group">
-				<select name="ifont" id="ifont">
+				<select name="ifont" id="uifont">
 					<?php
 
 					foreach($font_options['ifont'] as $name){
@@ -140,7 +151,7 @@
 			<fieldset id="output-set" class="col-xs-6">
 			<legend>Output</legend>
 				<div class="input-group">
-				<select name="ofont" id="ofont">
+				<select name="ofont" id="uofont">
 					<?php
 					foreach($font_options['ofont'] as $name){
 							if(isset($ochecked) && $ochecked == $name){
@@ -162,8 +173,19 @@
 			<legend>File Upload</legend>
 			<input type="file" name="inputfile" value="browse" class="input-file" id="inputfile">
 			</fieldset>
-			<fieldset id="control-set">
-			<legend>Controls</legend>
+			<fieldset id="control-set3">
+			
+			<div id="controls">
+				<div class="input-groups">
+					<label for="en_zwsp" class="control-label checkbox-inline">
+					<input type="checkbox" name="en_zwsp" id="en_zwsp">
+					 Add Zero-Width-Space</label>
+					 <p class="help-block">Selecting this will add Zero-Width-Space unicode character according to Myanmar word break rules.</p>					
+				</div>
+			</div>
+			</fieldset>
+			<fieldset id="control-set4">
+			
 			<div id="ascii-controls">
 				<div class="input-groups">
 					<label for="spelling_check" class="control-label checkbox-inline">
@@ -179,7 +201,7 @@
 			  <div class="input-group">
 				<label for="exceptions">Exceptions</label>
 				<input type="text" name="exceptions" id="exceptions" class="form-control">
-				<p class="help-block">Enter words list seperated by comma to ignore in convertion! If your word is less than 4 letters, please use atleast 2 words combined. <br>For Example: if your want to ignore the word "you" or "I" from the sentence "I love you.", use "I love" or "love you." or the whole sentence "I love you."</p>
+				<p class="help-block">Enter words list seperated by comma to ignore in convertion! If your word is less than 4 letters, please use at least 2 words combined. <br>For Example: if your want to ignore the word "you" or "I" from the sentence "I love you.", use "I love" or "love you." or the whole sentence "I love you."</p>
 			  </div>
 			</div>
 			<button type="submit" name="submit" id="submit" class="btn btn-primary">Convert</button>
@@ -206,7 +228,7 @@
 			<div class="panel">Name:	Myanmar Font Converter<br>
 			Web URI: <a href="http://converter.myanmapress.com">http://converter.myanmapress.com</a><br>
 			Description: Use to convert ASCII and Unicode fonts vice verse.<br>
-			Version: 1.0<br>
+			Version: 2.0<br>
 			Author: Sithu Thwin<br>
 			Author URI: <a href="http://www.thwin.net/">http://www.thwin.net/</a><br>
 			License: GPLv2 or later<br>

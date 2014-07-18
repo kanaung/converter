@@ -1,31 +1,13 @@
 <?php
-/*
- * @package Zawgyi-One
- * 
- * @file uni/zg.php - Zawgyi-One to Unicode
- * 
- * Copyright 2014 Sithu Thwin <sithu@thwin.net>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
+/**
+ * @file Ayar/Zawgyi-One-rules.php	Zawgyi-One to Ayar conveting rules.
+ * @ingroup a_modules
  * 
  */
 
-
+ 
 /**
- * @var array $conv_rules Zawgyi-One to Unicode.
+ * @var array $conv_rules Converting rules for Zawgyi-One to Ayar array.
  */
 $conv_rules = array(
 			'ဳ' => 'ု',
@@ -101,18 +83,6 @@ $conv_rules = array(
 			'ၾသ'=>'ဩ',
 			'ေၾသာ္'=>'ဪ',
 		);
-		
 
-/**
- * @var array $order reorder Zawgyi-One to Unicode standard. 
- */
-$order = array(
-			'(ြ)([က-အ])'=>'$2$1',
-			'ေ([က-အ])င်္'=>'င်္$1ေ',
-			'(ေ)([က-အ])([ျြွဲှ]+)?'=>'$2$3$1',
-			'(ံ)(ု)' => '$2$1',
-			'(်)(့)'=>'$2$1',
-			'([က-အ])([က-အ])(င်္)' => '$1$3$2'
-		);
-?>
+
 

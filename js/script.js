@@ -19,7 +19,7 @@ $(function () {
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;						
 					default:
-						$("#input").css("font-family","Myanmar3, Tharlon, Padauk");
+						$("div#ascii-controls").addClass('hide-ascii-controls');
 					break;
 				}
 				var ofont = $("select#ofont").val();
@@ -42,7 +42,7 @@ $(function () {
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
 					default:
-						$("#input").css("font-family","Myanmar3, Tharlon, Padauk");
+						$("div#ascii-controls").addClass('hide-ascii-controls');
 					break;
 				}
 			});

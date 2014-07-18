@@ -70,7 +70,7 @@
 								}
 								else
 								{
-									if(d[key]==e) //found is set for not overwriting first occurence
+									if(d[key]==e) 
 									{
 										result.push(f); //push key into array
 									}
@@ -78,13 +78,61 @@
 							}
 						}
 					}
+				$(document).ready(function() {
+				var ifont = $("select#ifont").val();
+				var font_list =<?php echo json_encode($font_list); ?>;
+				loop_object(font_list,ifont,'');
+				var ofont = result;
+				var new_option = '';
+				for (i = 0; i < ofont.length; i++) {
+					new_option += "<option name="+ ofont[i] +" id="+ ofont[i] +">"+ ofont[i] +"</option>";
+				}
+				$("select#ofont").html(new_option);
+				
+				result = []; //resetting array for next time usage without reloading page
+				
+				});
+				$(document).ready(function() {
+				var ifont = $("select#uifont").val();
+				var font_list =<?php echo json_encode($font_list); ?>;
+				loop_object(font_list,ifont,'');
+				var ofont = result;
+				var new_option = '';
+				for (i = 0; i < ofont.length; i++) {
+					new_option += "<option name="+ ofont[i] +" id="+ ofont[i] +">"+ ofont[i] +"</option>";
+				}
+				$("select#uofont").html(new_option);
+				
+				result = []; //resetting array for next time usage without reloading page
+				
+				});
 				$("select#ifont").change(function() {
 				var ifont = $("select#ifont").val();
 				var font_list =<?php echo json_encode($font_list); ?>;
 				loop_object(font_list,ifont,'');
-				console.log(result.join());
+				var ofont = result;
+				var new_option = '';
+				for (i = 0; i < ofont.length; i++) {
+					new_option += "<option name="+ ofont[i] +" id="+ ofont[i] +">"+ ofont[i] +"</option>";
+				}
+				$("select#ofont").html(new_option);
+				
 				result = []; //resetting array for next time usage without reloading page
-				//alert(result);
+				
+				});
+				$("select#uifont").change(function() {
+				var ifont = $("select#uifont").val();
+				var font_list =<?php echo json_encode($font_list); ?>;
+				loop_object(font_list,ifont,'');
+				var ofont = result;
+				var new_option = '';
+				for (i = 0; i < ofont.length; i++) {
+					new_option += "<option name="+ ofont[i] +" id="+ ofont[i] +">"+ ofont[i] +"</option>";
+				}
+				$("select#uofont").html(new_option);
+				
+				result = []; //resetting array for next time usage without reloading page
+				
 				});
 			}(jQuery));// Invoke the function with the jQuery object as its argument
 		</script>

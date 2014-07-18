@@ -177,29 +177,22 @@ class Converter {
 	 * 							-# output (Output encoding - default is myanmar3)
 	 * 							-# input_font (Input encoding)
 	 * 							-# encoding (encoding type - ascii or utf8 - default is utf8 or none)
+	 * 							-# spelling_check (Enable spelling checking when converting ascii fonts.)
 	 * 							-# text-only (Source content is plain text or other format such as html, php etc. - default is false)
 	 * 							-# en_zwsp (enable or disable adding Zero-Width-Space in converted result.)
 	 * 							-# exceptions (commas seperated list of words or phrase to ignore from conversion process.)
+	 * 							-# suggestion (enable to use user suggested words list.)
 	 * 
 	 * @returns	string $this->text	Return converted content.
 	 */
-	public function convert ( $text, $options = array
-	(
-		'output'     => 'myanmar3',
-		'input_font' => '',
-		'encoding'   => '',
-		'text-only'  => false,
-		'en_zwsp'    => true,
-		'exceptions' => '',
-	) ) {
+	public function convert ( $text, $options = array() ) {
 		
-
 		foreach ( $options as $option_name => $option_value )
 		{
 			$$option_name = $option_value;
 
 			//extract $options and set $option_name as variable name and $option_value as variable value.
-		}
+		}	
 		
 		if ( $input_font === '' || $input_font == 'auto' )
 		{
@@ -243,26 +236,33 @@ class Converter {
 				'/zwsp.php' );
 		} else
 		{
-			die ( 'Fatal Error: Your converting rules file cannot be found!' );
+			$correction = array();
+			$final_text = 'Fatal Error: Your converting rules file cannot be found!
+File is missing or never existed. Try another choice or contact developer!';
+			//return ;
 		}
 		
 		if ( !isset ( $order ) )
 		{
 
 			/**
-			 * @var $order 
+			 * @var array $order 	Character ordering rules array.
 			 */
 			$order = array ( );
 
 			//if $order is not defined, set it to empty array.
 		}
-		if ( $en_zwsp === true )
+
+			/**
+			 * @var bool $en_zwsp	enable/disable adding zwsp. 
+			 */
+		if ( $en_zwsp == true )
 		{
 
 			/**
 			 * @var $final_regex_array 
 			 */
-			$final_regex_array = array_merge ( $order, $correction, $zwsp );
+			$final_regex_array = array_merge_recursive ( $order, $correction, $zwsp );
 
 			//merge all defined regular expression arrays.
 		} else
@@ -271,7 +271,7 @@ class Converter {
 			/**
 			 * @var $final_regex_array 
 			 */
-			$final_regex_array = array_merge ( $order, $correction );
+			$final_regex_array = array_merge_recursive ( $order, $correction );
 
 			//merge all defined regular expression arrays without zwsp array.
 		}
@@ -337,71 +337,7 @@ class Converter {
 						$value = preg_replace ( '/^[\d\w]{1,3}$/u', ' $0 ', $value );
 					}
 
-					/* Output dictionary array from dictionary file */
-					/*
-												/**
-												 * @var $en_GB_dic 
-												 */
-					$en_GB_dic = file ( './dic/en_GB.dic', FILE_SKIP_EMPTY_LINES );
 
-					/**
-					 * @var $en_US_dic 
-					 */
-					$en_US_dic = file ( './dic/en_US.dic', FILE_SKIP_EMPTY_LINES );
-
-					/**
-					 * @var $dic_file 
-					 */
-					$dic_file = array_merge ( $en_GB_dic, $en_US_dic );
-
-					/**
-					 * @var $dic_file_unique 
-					 */
-					$dic_file_unique = array_unique ( $dic_file );
-
-					//$dic_file_unique_ucwords = $dic_file_unique;
-					array_walk ( $dic_file_unique, 'trim_value' );
-					array_walk ( $dic_file_unique, 'space_on_short_words' );
-
-					//array_walk($dic_file_unique_ucwords, 'ucwords_value');
-					//array_walk($dic_file_unique_ucwords, 'trim_value');
-					/**
-					 * @var $dic_words 
-					 */
-					$dic_words = array_combine ( $dic_file_unique, $dic_file_unique );
-
-					//$dic_ucwords = array_combine($dic_file_unique_ucwords, $dic_file_unique_ucwords);
-					/**
-					 * @var $dictionary 
-					 */
-					$dictionary = $dic_words;
-					array_multisort ( $dictionary );
-
-					/**
-					 * @var $content 
-					 */
-					$content = "<?php \n$dictionary = array(";
-					foreach ( $dictionary as $word )
-					{
-						$content .= "\"$word\"=>\"$word\",\n";
-					}
-					$content .= ");\n?>";
-
-					//die($content);
-					/**
-					 * @var $output_file 
-					 */
-					$output_file = './dic/dictionary_array.php';
-
-					/**
-					 * @var $af 
-					 */
-					$af = fopen ( $output_file, 'w' ) or die ( "File is not writable or directory does not exist." );
-					fwrite ( $af, $content );
-					fclose ( $af );
-					//die ( );
-
-					//die(var_dump($english_words));
 					if ( isset ( $spelling_check ) && false !== $spelling_check )
 					{
 
@@ -700,31 +636,33 @@ class Converter {
 					 */
 					$final_text = strtr ( $text, $conv_rules );
 				}
-				foreach ( array_merge ( $order, $correction, $zwsp ) as $key => $value )
+				foreach ( $final_regex_array as $key => $value )
 				{
-
+					$reg_count = 0;
 					/**
 					 * @var $final_text 
 					 */
 					$final_text = preg_replace ( '/' .
 						$key .
-						'/us', $value, $final_text );
+						'/us', $value, $final_text, -1, $reg_count );
+					//	print($reg_count.'<br>');
 				}
 			} else
 			{
 				foreach ( $final_regex_array as $key => $value )
 				{
-
+					$reg_count = 0;
 					/**
 					 * @var $final_text 
 					 */
 					$final_text = preg_replace ( '/' .
 						$key .
-						'/us', $value, $text );
+						'/us', $value, $text, -1, $reg_count );
+					//	print($reg_count.'<br>');
 				}
 			}
 		}
-
+		
 		/**
 		 * @var $text 
 		 */

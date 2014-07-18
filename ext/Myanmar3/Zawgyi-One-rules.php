@@ -1,18 +1,14 @@
 <?php
 /**
- * @file ay/zg.php - Zawgyi-One to Ayar
- * @brief Zawgyi-One to Ayar
- * @defgroup zawgyi
- * @ingroup ayar
+ * @file Myanmar3/Zawgyi-One-rules.php	Zawgyi-One to Unicode conveting rules.
+ * @ingroup m_modules
+ * 
  */
- 
+
+
+
 /**
- * @ingroup zawgyi
- * @section zawgyi Zawgyi-One
- * Converting rules for Zawgyi-One to Ayar
- * @var array $conv_rules 
- * @ref unicode
- * @include ayar/zawgyi-one-rules.php
+ * @var array $conv_rules Zawgyi-One to Unicode.
  */
 $conv_rules = array(
 			'ဳ' => 'ု',
@@ -90,4 +86,26 @@ $conv_rules = array(
 		);
 
 
+/**
+ * @var array $order reorder Zawgyi-One to Unicode standard.
+ *//*
+$order = array(
+			'(ြ)([က-အ])'=>'$2$1',
+			'ေ([က-အ])င်္'=>'င်္$1ေ',
+			'(ေ)([က-အ])([ျြွဲှ]+)?'=>'$2$3$1',
+			'(ံ	)(ု	)' => '$2$1',
+			'(်	)(့	)'=>'$2$1',
+			'([က-အ])([က-အ])(င်္)' => '$1$3$2'
+		);
+		*/
+$order = array(
+	'([ေြ]|ေြ)([က-အ၀၈၇])' => '$2$1',
+	'([က-အ၀၈၇])(ေ)([ျ	ြ	ွ		ဲ	ှ	]+)'=>'$1$3$2',
+	'([	ု		ူ	])([	ိ		ီ	])'=>'$2$1',
+	'(|ွှ|[ှွ])(ျ)'=>'$2$1',
+	'([	ှ	ံ	်	])([	ွ		ှ	့])'=>'$2$1',
+	'([က-အ])([က-အ])(င်္)' => '$1$3$2',
+	'([က-အ])ေင်္'=>'င်္$1ေ',
+);
+?>
 

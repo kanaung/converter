@@ -1,24 +1,19 @@
 <?php
 /**
- * @file ay/uni.php - Unicode to Ayar
- * @brief Unicode to Ayar
- * @defgroup unicode
- * @ingroup ayar
+ * @file Ayar/Myanmar3-rules.php	Myanmar3 to Ayar rules.
+ * @ingroup a_modules
+ * 
  */
 
 /**
- * @ingroup unicode
  * Nothing to convert Unicode to Ayar
- * @var array $conv_rules 
+ * @var array $conv_rules No rules to convert for Ayar.
  * 
  */
 $conv_rules = array();
 
 /**
- * @ingroup unicode
- * @section unicode Unicode
- * reorder Unicode standard to Ayar
- * @var array $order 
+ * @var array $order Character ordering rules.
  */
 $order = array(
 			'([က-အ]္[က-အ])ြေ'=>'ေြ$1',

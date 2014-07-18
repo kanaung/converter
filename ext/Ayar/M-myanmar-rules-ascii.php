@@ -1,26 +1,10 @@
 <?php
-/*
- * @file myanmar3/m-myanmar1-rules.php - NLD1 to Unicode conveting rules
- * 
- * Copyright 2014 Sithu Thwin <sithu@thwin.net>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- * 
+/**
+ * @file Ayar/M-myanmar-rules-ascii.php	M-Myanmar to Ayar conveting rules.
+ * @ingroup a_modules
  * 
  */
+
  
 
 /**
@@ -184,14 +168,6 @@ $conv_rules = array(
  */
 $order = array(
 			'([^၀-၉])၇([^၀-၉])?'=>'$1ရ$2',
-			'(ြု)([က-အ])'=>'$2$1',
-			'(ြ)([က-အ])(္)?'=>'$2$3$1',
-			'(ေ)([က-အ])([ျြွှ]+)?'=>'$2$3$1',
-			'(ံ)(ု)' => '$2$1',
-			'(်)(့)'=>'$2$1',
-			'(ဲ)(ွ)'=>'$2$1',
-			'([က-အ])([က-အ])(င်္)' => '$1$3$2',
-			'([က-အ])f'=>'$1်',
 			'([a-z0-9]+)ျ'=>'$1s',
 			'([a-z0-9]+)ယ'=>'$1,',
 			'([a-z0-9]+)ါ်'=>'$1:',

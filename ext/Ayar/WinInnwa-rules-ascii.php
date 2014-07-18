@@ -1,18 +1,14 @@
 <?php
 /**
- * @file ay/uni.php - Win Innwa to Ayar
- * @brief Win Innwa to Ayar
- * @defgroup win
- * @ingroup ayar
+ * @file Ayar/WinInnwa-rules-ascii.php	Win Innwa to Ayar conveting rules.
+ * @ingroup a_modules
+ * 
  */
+
  
+
 /**
- * @ingroup win
- * @section wininnwa Win Innwa
- * Converting rules for Win Innwa to Ayar
- * @var array $conv_rules 
- * @ref unicode
- * @include ayar/win\ innwa-rules.php
+ * @var array $conv_rules	Win Innwa to Ayar conveting rules array.
  */
 $conv_rules = array(
 			/*1st rows on keyboard*/
@@ -43,9 +39,6 @@ $conv_rules = array(
 		);
 
 /**
- * @ingroup win
- * @section wininnwa Win Innwa
- * reorder Win Innwa to Ayar
  * @var array $order
  * 
  */
