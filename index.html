@@ -42,22 +42,27 @@
 <h1>
 <a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
 
-<pre><code>include('class-converter.php');
-$source_text = "aeaumif;vm;";
-$options = array(
-        'input_font' =&gt; 'WinInnwa', // win innwa, ayar, zawgyi-one, myanmar3
-        'output' =&gt; 'Zawgyi-One', // ayar, zawgyi-one, myanmar3
-        'encoding' =&gt; 'ascii', //this is input source font encoding ascii or utf-8
-        'spelling_check' =&gt; false, //boolean
-        'text_only' =&gt; true, //boolean
-        'en_zwsp' =&gt; true, //boolean
-        'exceptions' =&gt; 'I love, love you!', //words list seperated by comma to ignore from converter
-        'suggested' =&gt; true, //boolean
-    );
-$converter = new Converter();
+<div class="highlight highlight-php"><pre>
+<span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">include</span><span class="p">(</span><span class="s1">'class-converter.php'</span><span class="p">);</span>
+<span class="nv">$source_text</span> <span class="o">=</span> <span class="s2">"aeaumif;vm;"</span><span class="p">;</span>
+<span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'input_font'</span> <span class="o">=&gt;</span> <span class="s1">'WinInnwa'</span><span class="p">,</span> <span class="c1">// win innwa, ayar, zawgyi-one, myanmar3</span>
+        <span class="s1">'output'</span> <span class="o">=&gt;</span> <span class="s1">'Zawgyi-One'</span><span class="p">,</span> <span class="c1">// ayar, zawgyi-one, myanmar3</span>
+        <span class="s1">'encoding'</span> <span class="o">=&gt;</span> <span class="s1">'ascii'</span><span class="p">,</span> <span class="c1">//this is input source font encoding ascii or utf-8</span>
+        <span class="s1">'spelling_check'</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span> <span class="c1">//boolean</span>
+        <span class="s1">'text_only'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="c1">//boolean</span>
+        <span class="s1">'en_zwsp'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="c1">//boolean</span>
+        <span class="s1">'exceptions'</span> <span class="o">=&gt;</span> <span class="s1">'I love, love you!'</span><span class="p">,</span> <span class="c1">//words list seperated by comma to ignore from converter</span>
+        <span class="s1">'suggested'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="c1">//boolean</span>
+    <span class="p">);</span>
+<span class="nv">$converter</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Converter</span><span class="p">();</span>
 
-echo $converter-&gt;convert($source_text, $options);
-</code></pre>
+<span class="k">echo</span> <span class="nv">$converter</span><span class="o">-&gt;</span><span class="na">convert</span><span class="p">(</span><span class="nv">$source_text</span><span class="p">,</span> <span class="nv">$options</span><span class="p">);</span>
+
+<span class="cp">?&gt;</span><span class="x"></span>
+
+</pre></div>
       </section>
     </div>
 
