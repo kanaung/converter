@@ -23,9 +23,10 @@ $(document).ready(function()
 			success: function (data) 
 			{
 				output_text = data.output_text;
-				if(data.output_text){
-				$('#output').text(data.output_text);
-				$('#ajax_output').text(data.output_text);
+				if(data.output_text)
+				{
+					$('#output').text(data.output_text);
+					$('#ajax_output').text(data.output_text);
 				}
 				$('#convert_time').text(data.time);
 				$("#output").css("font-family",data.ofont_family);
@@ -36,7 +37,12 @@ $(document).ready(function()
 				$(ofont_selector).attr('selected');
 				$(ifont_selector).attr('selected');
 				$('#time_container').show();
+				$('#output').focus();
 	        }
 	    });
+	    $('#output').focus(function(e)
+    	{
+    		$(this).select();
+    	});
 	});
 });
