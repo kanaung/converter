@@ -6,16 +6,16 @@ $(function () {
 				var ifont = $("select#ifont").val();
 				$("#input").css("font-family",ifont);
 				switch(ifont) {
-					case 'win innwa':
+					case 'WinInnwa':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
-					case 'm-myanmar':
+					case 'M-myanmar':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
-					case 'kannaka':
+					case 'Kannaka':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
-					case 'nld1':
+					case 'NLD1':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;						
 					default:
@@ -29,16 +29,16 @@ $(function () {
 				var ifont = $("select#ifont").val();
 				$("#input").css("font-family",ifont);
 				switch(ifont) {
-					case 'win innwa':
+					case 'WinInnwa':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
-					case 'm-myanmar':
+					case 'M-myanmar':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
-					case 'kannaka':
+					case 'Kannaka':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
-					case 'nld1':
+					case 'NLD1':
 						$("div#ascii-controls").removeClass('hide-ascii-controls');
 					break;
 					default:
