@@ -219,8 +219,13 @@ class Converter {
 		/**
 		 * @var $ext_file 
 		 */
+		if(isset($encoding) && $encoding != ''){
+		$ext_file = $input .
+			'-rules-'.$encoding.'.php';
+		}else{
 		$ext_file = $input .
 			'-rules.php';
+		}
 		
 
 		if ( file_exists ( $ext_dir .

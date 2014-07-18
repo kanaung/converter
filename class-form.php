@@ -322,6 +322,8 @@ class FormSubmit{
 			'exceptions' => $exceptions,
 			'suggested' => $suggested ? true:false,
 			);
+		//	print($encoding);
+		//	die();
 
 		if(!empty($file_data)){
 			if(isset($file_data['file'])){

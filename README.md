@@ -11,8 +11,8 @@ Usage
 include('class-converter.php');
 $source_text = "aeaumif;vm;";
 $options = array(
-		'input_font' => 'win innwa', // win innwa, ayar, zawgyi-one, myanmar3
-		'output' => 'zawgyi-one', // ayar, zawgyi-one, myanmar3
+		'input_font' => 'WinInnwa', // win innwa, ayar, zawgyi-one, myanmar3
+		'output' => 'Zawgyi-One', // ayar, zawgyi-one, myanmar3
 		'encoding' => 'ascii', //this is input source font encoding ascii or utf-8
 		'spelling_check' => false, //boolean
 		'text_only' => true, //boolean
