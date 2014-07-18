@@ -1,6 +1,15 @@
 $(document).ready(function()
 {
 	$('#time_container').hide();
+	ZeroClipboard.config({swfPath: "./js/zeroclipboard/ZeroClipboard.swf"});
+	var client = new ZeroClipboard($(".btn-clipboard"));
+	client.on( 'ready', function(event) 
+	{
+        client.on( 'aftercopy', function(event) 
+        {
+        	$('#output').select();
+        });
+    });
 	$('form#converter').submit(function(e)
 	{
 		var formData = $(this).serialize();
@@ -23,9 +32,10 @@ $(document).ready(function()
 			success: function (data) 
 			{
 				output_text = data.output_text;
-				if(data.output_text){
-				$('#output').text(data.output_text);
-				$('#ajax_output').text(data.output_text);
+				if(data.output_text)
+				{
+					$('#output').text(data.output_text);
+					$('#ajax_output').text(data.output_text);
 				}
 				$('#convert_time').text(data.time);
 				$("#output").css("font-family",data.ofont_family);
@@ -36,7 +46,16 @@ $(document).ready(function()
 				$(ofont_selector).attr('selected');
 				$(ifont_selector).attr('selected');
 				$('#time_container').show();
+				$('#output').focus();
 	        }
 	    });
+	    $('#input').focus(function(e)
+    	{
+    		$(this).select();
+    	});
+    	$('#output').focus(function(e)
+    	{
+    		$(this).select();
+    	});
 	});
 });

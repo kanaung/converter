@@ -75,6 +75,11 @@
 								Output
 							</div>
 							<div class="panel-body">
+								<div class="zero-clipboard">
+									<span class="btn-clipboard" data-clipboard-target="output">
+									Copy
+									</span>
+								</div>
 								<textarea class="form-control" rows="7" name="output" id="output" style="font-family:<?php echo $ofontfamily;?>"></textarea>
 								<br/>
 								<select class="form-control" name="ofont" id="ofont" onchange="adjustOutputFont(this,'',document.getElementById('output'))">
@@ -253,6 +258,7 @@
 		</div>
 		<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 		<script type="text/javascript" src="template/js/bootstrap.js"></script>
+		<script type="text/javascript" src="js/zeroclipboard/ZeroClipboard.js"></script>
 		<script type="text/javascript" src="js/script.js"></script>
 		<script>
 			function adjustOutputFont(iId,oId,iT)
