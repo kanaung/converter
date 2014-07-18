@@ -95,8 +95,8 @@ class FormSubmit{
 		$rules_files = new RegexIterator($files, '/-rules(.*)\.php$/i');
 		
 		foreach ($rules_files as $file) {
-
-		preg_match('/\/ext\/(.*)\/(.*)-rules(.*)\.php/',$file, $match);
+		$string = str_replace("\\", "/", $file); //especially for window machince 
+		preg_match('/\/ext\/(.*)\/(.*)-rules(.*)\.php/',$string, $match);
 		//print_r($match);
 		$ifont_name[] = $match[2];
 		$ofont_name[] = $match[1];

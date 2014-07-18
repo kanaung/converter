@@ -36,15 +36,6 @@
 				</div>
 			</div>
 			</nav>
-				<div class="row" id="time_container">
-					<div class="col-md-12">
-						<div class="panel panel-default alert-success">
-							<div class="panel-body" style="text-align:center;">
-								<span id="convert_time"><?php if(isset($time)){ echo $time;} ?></span>
-							</div>
-						</div>
-					</div>
-				</div>
 			<form id="converter" name="converter" enctype="multipart/form-data" action="" method="POST">
 				<div class="row">
 					<div class="col-md-6">
@@ -244,6 +235,15 @@
 					<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="time_container">
+				<div class="col-md-12">
+					<div class="panel panel-default alert-success">
+						<div class="panel-body" style="text-align:center;">
+							<span id="convert_time"><?php if(isset($time)){ echo $time;} ?></span>
+						</div>
 					</div>
 				</div>
 			</div>
