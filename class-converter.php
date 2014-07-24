@@ -29,6 +29,7 @@ error_reporting ( E_ALL );
  * @brief Converter class to convert from one encoding to another in different encoding of Myanmar language.
  */
 class Converter {
+	private $ROOT_DIR;
 
 	/**
 	 * @var string $consonent	Myanmar consonent unicode string encoding in php syntax.
@@ -163,8 +164,9 @@ class Converter {
 	 * @brief	Constructor function for Converter class.
 	 */
 	public function __construct ( ) {
-
+		
 		mb_internal_encoding ( 'UTF-8' );
+		$this->ROOT_DIR = dirname(__FILE__) . '/';
 	}
 
 	/**
@@ -185,25 +187,25 @@ class Converter {
 	 * 
 	 * @returns	string $this->text	Return converted content.
 	 */
-	public function convert ( $text, $options = array() ) {
+	public function convert ( $text, $options = array ( ) ) {
 		
 		foreach ( $options as $option_name => $option_value )
 		{
 			$$option_name = $option_value;
 
 			//extract $options and set $option_name as variable name and $option_value as variable value.
-		}	
+		}
 		
 		if ( $input_font === '' || $input_font == 'auto' )
 		{
-
+			
 			/**
 			 * @var $input 
 			 */
-			$input = $this -> enc_test ( $text );
+			$input = $this->enc_test ( $text );
 		} else
 		{
-
+			
 			/**
 			 * @var $input 
 			 */
@@ -213,43 +215,38 @@ class Converter {
 		/**
 		 * @var $ext_dir 
 		 */
-		$ext_dir = 'ext/' .
-			$output;
-
+		$ext_dir = './ext/';
+		$rules_dir = 'rules/'. $output;
+		
 		/**
 		 * @var $ext_file 
 		 */
-		if(isset($encoding) && $encoding != ''){
-		$ext_file = $input .
-			'-rules-'.$encoding.'.php';
-		}else{
-		$ext_file = $input .
-			'-rules.php';
+		if ( isset ( $encoding ) && $encoding != '' )
+		{
+			$ext_file = $input . '-rules-' . $encoding . '.php';
+		} else
+		{
+			$ext_file = $input . '-rules.php';
 		}
 		
 
-		if ( file_exists ( $ext_dir .
-			'/' .
-			$ext_file ) )
+		if ( file_exists ( $this->ROOT_DIR . $ext_dir . $rules_dir . '/' . $ext_file ) )
 			{
-				require ( $ext_dir .
-				'/' .
-				$ext_file );
-			include ( $ext_dir .
-				'/correction.php' );
-			include ( $ext_dir .
-				'/zwsp.php' );
+				require ( $this->ROOT_DIR . $ext_dir . $rules_dir . '/' . $ext_file );
+			include ( $this->ROOT_DIR . $ext_dir . $rules_dir . '/correction.php' );
+			include ( $this->ROOT_DIR . $ext_dir . $rules_dir.  '/zwsp.php' );
 		} else
 		{
-			$correction = array();
+			$correction = array ( );
 			$final_text = 'Fatal Error: Your converting rules file cannot be found!
 File is missing or never existed. Try another choice or contact developer!';
+
 			//return ;
 		}
 		
 		if ( !isset ( $order ) )
 		{
-
+			
 			/**
 			 * @var array $order 	Character ordering rules array.
 			 */
@@ -258,12 +255,12 @@ File is missing or never existed. Try another choice or contact developer!';
 			//if $order is not defined, set it to empty array.
 		}
 
-			/**
-			 * @var bool $en_zwsp	enable/disable adding zwsp. 
-			 */
+		/**
+		 * @var bool $en_zwsp	enable/disable adding zwsp. 
+		 */
 		if ( $en_zwsp == true )
 		{
-
+			
 			/**
 			 * @var $final_regex_array 
 			 */
@@ -272,7 +269,7 @@ File is missing or never existed. Try another choice or contact developer!';
 			//merge all defined regular expression arrays.
 		} else
 		{
-
+			
 			/**
 			 * @var $final_regex_array 
 			 */
@@ -285,13 +282,11 @@ File is missing or never existed. Try another choice or contact developer!';
 		{
 			foreach ( $final_regex_array as $key => $value )
 			{
-
+				
 				/**
 				 * @var $final_text 
 				 */
-				$final_text = preg_replace ( '/' .
-					$key .
-					'/u', $value, $text );
+				$final_text = preg_replace ( '/' . $key . '/u', $value, $text );
 			}
 		} else
 		{
@@ -299,7 +294,7 @@ File is missing or never existed. Try another choice or contact developer!';
 			{
 				if ( $encoding == 'ascii' )
 				{
-
+					
 					/**
 					 * @fn	trim_value
 					 * @brief	
@@ -339,13 +334,13 @@ File is missing or never existed. Try another choice or contact developer!';
 						/**
 						 * @var $value 
 						 */
-						$value = preg_replace ( '/^[\d\w]{1,3}$/u', ' $0 ', $value );
+						$value = preg_replace('/^[\d\w]{1,3}$/u',' $0 ',$value);
 					}
-
+					
 
 					if ( isset ( $spelling_check ) && false !== $spelling_check )
 					{
-
+						
 						/**
 						 * @var $stripped_text 
 						 */
@@ -365,7 +360,7 @@ File is missing or never existed. Try another choice or contact developer!';
 						
 						if ( function_exists ( 'enchant_broker_init' ) )
 						{
-
+							
 							/**
 							 * @var $tag 
 							 */
@@ -387,7 +382,7 @@ File is missing or never existed. Try another choice or contact developer!';
 							$dicts = enchant_broker_list_dicts ( $r );
 							if ( enchant_broker_dict_exists ( $r, $tag ) )
 							{
-
+								
 								/**
 								 * @var $d 
 								 */
@@ -401,23 +396,15 @@ File is missing or never existed. Try another choice or contact developer!';
 								{
 									if ( !empty ( $word ) )
 									{
-
+										
 										/**
 										 * @var $wordcorrect 
 										 */
 										$wordcorrect = enchant_dict_check ( $d, $word );
 										if ( $wordcorrect )
 										{
-
-											/**
-											 * @var $word 
-											 */
-											$word = preg_replace ( '/^\d+$/u', '"$0"', $word );
-
-											/**
-											 * @var $word 
-											 */
-											$word = preg_replace ( '/^[\d\w]{1,3}$/u', ' $0 ', $word );
+											$word = preg_replace('/^\d+$/u','"$0"',$word);
+											$word = preg_replace('/^[\d\w]{1,3}$/u',' $0 ',$word);
 											$english_words_array[$word] = $word;
 										}
 									}
@@ -429,14 +416,14 @@ File is missing or never existed. Try another choice or contact developer!';
 							enchant_broker_free ( $r );
 						} else
 						{
-							include ( './dic/dictionary_array.php' );
+							include ( $this->ROOT_DIR . $ext . 'dic/dictionary_array.php' );
 							
 							array_walk ( $words_array, 'space_on_short_words' );
 							foreach ( $words_array as $word )
 							{
 								if ( !empty ( $word ) )
 								{
-
+									
 									/**
 									 * @var $plural_ies 
 									 */
@@ -447,7 +434,7 @@ File is missing or never existed. Try another choice or contact developer!';
 										array_walk ( $plural_match_ies, 'space_on_short_words' );
 										if ( $plural_match_ies[2] == ' ies ' )
 										{
-
+											
 											/**
 											 * @var $singular 
 											 */
@@ -455,7 +442,7 @@ File is missing or never existed. Try another choice or contact developer!';
 												'y';
 										} elseif ( $plural_match_ies[4] == ' s ' )
 										{
-
+											
 											/**
 											 * @var $singular 
 											 */
@@ -482,7 +469,7 @@ File is missing or never existed. Try another choice or contact developer!';
 						$english_words = array ( );
 						if ( isset ( $english_words_array ) && !empty ( $english_words_array ) )
 						{
-
+							
 							/**
 							 * @var $english_words 
 							 */
@@ -490,7 +477,7 @@ File is missing or never existed. Try another choice or contact developer!';
 						}
 						if ( isset ( $plural_array ) && !empty ( $plural_array ) )
 						{
-
+							
 							/**
 							 * @var $english_words 
 							 */
@@ -536,7 +523,7 @@ File is missing or never existed. Try another choice or contact developer!';
 					$user_content_array = array ( );
 					if ( isset ( $exceptions ) )
 					{
-
+						
 						/**
 						 * @var $exceps_array 
 						 */
@@ -557,13 +544,13 @@ File is missing or never existed. Try another choice or contact developer!';
 					}
 					if ( isset ( $suggested ) && true === $suggested )
 					{
-						if ( file_exists ( './user/userdic.dic' ) )
+						if ( file_exists ( $this->ROOT_DIR . $ext . 'user/userdic.dic' ) )
 						{
-
+							
 							/**
 							 * @var $user_dic 
 							 */
-							$user_dic = file ( './user/userdic.dic', FILE_SKIP_EMPTY_LINES );
+							$user_dic = file ( $this->ROOT_DIR . $ext . 'user/userdic.dic', FILE_SKIP_EMPTY_LINES );
 							array_walk ( $user_dic, 'trim_value' );
 							foreach ( $user_dic as $user_word )
 							{
@@ -578,7 +565,7 @@ File is missing or never existed. Try another choice or contact developer!';
 					
 					if ( !empty ( $user_content_array ) )
 					{
-
+						
 						/**
 						 * @var $user_content 
 						 */
@@ -598,7 +585,7 @@ File is missing or never existed. Try another choice or contact developer!';
 						/**
 						 * @var $userdic_file 
 						 */
-						$userdic_file = './user/userdic.dic';
+						$userdic_file = $this->ROOT_DIR . $ext . 'user/userdic.dic';
 
 						/**
 						 * @var $uaf 
@@ -614,7 +601,7 @@ File is missing or never existed. Try another choice or contact developer!';
 					$conv_array = $conv_rules;
 					if ( !empty ( $generated_array ) )
 					{
-
+						
 						/**
 						 * @var $conv_array 
 						 */
@@ -622,7 +609,7 @@ File is missing or never existed. Try another choice or contact developer!';
 					}
 					if ( isset ( $english_words ) && !empty ( $english_words ) )
 					{
-
+						
 						/**
 						 * @var $conv_array 
 						 */
@@ -635,7 +622,7 @@ File is missing or never existed. Try another choice or contact developer!';
 					$final_text = strtr ( $text, $conv_array );
 				} else
 				{
-
+					
 					/**
 					 * @var $final_text 
 					 */
@@ -644,12 +631,14 @@ File is missing or never existed. Try another choice or contact developer!';
 				foreach ( $final_regex_array as $key => $value )
 				{
 					$reg_count = 0;
+
 					/**
 					 * @var $final_text 
 					 */
 					$final_text = preg_replace ( '/' .
 						$key .
-						'/us', $value, $final_text, -1, $reg_count );
+						'/us', $value, $final_text, - 1, $reg_count );
+
 					//	print($reg_count.'<br>');
 				}
 			} else
@@ -657,22 +646,24 @@ File is missing or never existed. Try another choice or contact developer!';
 				foreach ( $final_regex_array as $key => $value )
 				{
 					$reg_count = 0;
+
 					/**
 					 * @var $final_text 
 					 */
 					$final_text = preg_replace ( '/' .
 						$key .
-						'/us', $value, $text, -1, $reg_count );
+						'/us', $value, $text, - 1, $reg_count );
+
 					//	print($reg_count.'<br>');
 				}
 			}
 		}
-		
+
 		/**
 		 * @var $text 
 		 */
-		$this -> text = $final_text;
-		return $this -> text;
+		$this->text = $final_text;
+		return $this->text;
 	}
 
 	/**
@@ -687,40 +678,40 @@ File is missing or never existed. Try another choice or contact developer!';
 		 * @var $zg_preg 
 		 */
 		$zg_preg = '/\x{1031}[\x{1047}\x{1048}\x{1040}]|[\x{1004}]\x{1039}|(\x{1031}[\x{103B}\x{107E}-\x{1084}])|([\x{107E}-\x{1084}][' .
-			$this -> consonent .
+			$this->consonent .
 			'])|(?<=[' .
-			$this -> consonent .
+			$this->consonent .
 			'])[\x{1094}\x{1095}]|(?<=\x{1000})[\x{1060}\x{1061}]|(?<=\x{1002})[\x{1062}\x{1063}]|(?<=\x{1005})[\x{1065}\x{1066}\x{1067}]|(?<=\x{1007})[\x{1068}\x{1069}]|[' .
-			$this -> consonent .
+			$this->consonent .
 			'][' .
-			$this -> lower_zg .
+			$this->lower_zg .
 			']|(^[\x{1004}\x{1005}\x{1009}\x{100A}]x{103A})|(^[' .
-			$this -> aa_group .
-			$this -> fifth_group .
+			$this->aa_group .
+			$this->fifth_group .
 			']\x{103D})/u';
 
 		/**
 		 * @var $uni_preg 
 		 */
 		$uni_preg = '/\x{103C}[\x{1031}\x{102D}\x{102E}\x{102F}\x{1030}\x{103D}\x{103E}]|\x{1031}\x{1038}|\x{1031}[' .
-			$this -> consonent .
+			$this->consonent .
 			'][\x{102D}-\x{1030}\x{1032}]+|\x{1031}[' .
-			$this -> consonent .
+			$this->consonent .
 			']\x{103B}[' .
-			$this -> consonent .
+			$this->consonent .
 			']\x{103A}|\x{1031}$|\x{103C}$/u';
 
 		/**
 		 * @var $ay_preg 
 		 */
 		$ay_preg = '/^\x{1031}|^\x{103C}|(\x{1031}\x{103C})|(\x{1031})[' .
-			$this -> consonent .
+			$this->consonent .
 			'](\x{1038})|(\x{1031}\x{103C})[' .
-			$this -> consonent .
+			$this->consonent .
 			']|(?<=\x{1031})[' .
-			$this -> consonent .
+			$this->consonent .
 			']|(?<![' .
-			$this -> consonent .
+			$this->consonent .
 			'])\x{1031}/u';
 
 		/**
@@ -730,35 +721,35 @@ File is missing or never existed. Try another choice or contact developer!';
 		
 		if ( preg_match ( $zg_preg, $text, $m ) )
 		{
-
+			
 			/**
 			 * @var $font_enc 
 			 */
 			$font_enc = 'zg';
 		} elseif ( $length < 7 && preg_match ( $uni_preg, $text, $m ) && !preg_match ( $ay_preg, $text, $m ) )
 		{
-
+			
 			/**
 			 * @var $font_enc 
 			 */
 			$font_enc = 'uni';
 		} elseif ( preg_match ( $uni_preg, $text, $m ) )
 		{
-
+			
 			/**
 			 * @var $font_enc 
 			 */
 			$font_enc = 'uni';
 		} elseif ( preg_match ( $ay_preg, $text, $m ) )
 		{
-
+			
 			/**
 			 * @var $font_enc 
 			 */
 			$font_enc = 'ay';
 		} else
 		{
-
+			
 			/**
 			 * @var $font_enc 
 			 */

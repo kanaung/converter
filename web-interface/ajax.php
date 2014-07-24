@@ -1,6 +1,13 @@
 <?php
 $start = microtime(true);
-require_once('./class-form.php');
+define('ROOT_DIR', dirname(dirname(__FILE__)) . '/');
+
+require_once( ROOT_DIR . 'web-interface/class-form.php');
+
+/**
+ * @var $form 
+ */
+$form = new FormSubmit ( );
 $converted = $form->converted();
 
 
