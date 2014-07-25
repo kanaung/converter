@@ -119,7 +119,7 @@ class FormSubmit {
 		
 		foreach ( $rules_files as $file )
 		{
-			
+			$file = str_replace("\\", "/", $file);
 			preg_match ( '/\/ext\/rules\/(.*)\/(.*)-rules(.*)\.php/', $file, $match );
 
 			//print_r($match);

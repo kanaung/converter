@@ -8,6 +8,7 @@ $(document).ready(function()
         client.on( 'aftercopy', function(event) 
         {
         	$('#output').select();
+        	alert('ေကာ္ပီကူးၿပီးပါၿပီ။');
         });
     });
 	$('form#converter').submit(function(e)

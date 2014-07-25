@@ -50,7 +50,7 @@ $json_output = array(
 	$output_text = $converted['output_text'];
 	$json_output['output_text'] = $output_text;
 	$end = microtime(true);
-	$time = "Converted in ".FormatElapsed($start, $end)." seconds !\n";
+	$time = FormatElapsed($start, $end)." စက္ကန့်အတွင်း ပြောင်းနိုင်ခဲ့ပါသည်။ !\n";
 	$json_output['time'] = $time;
 	echo json_encode($json_output);
 	}
