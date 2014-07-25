@@ -1,7 +1,9 @@
 <?php
 define('ROOT_DIR', dirname(__FILE__) . '/');
 //define('ROOT_DIR', basename(ROOT_PATH)); 
-require( ROOT_DIR . 'web-interface/view.php' ); ?>
+require( ROOT_DIR . 'web-interface/view.php' );
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>

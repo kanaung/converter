@@ -1,4 +1,5 @@
 <?php
+require_once ( ROOT_DIR . '/class-converter.php' );
 /**
  * @file	class-form.php
  * @brief	This is form submitting class file.
@@ -158,7 +159,7 @@ class FormSubmit {
 		 */
 		$this->font_list = $font_list;
 		
-		require_once ( ROOT_DIR . '/class-converter.php' );
+		
 
 		/**
 		 * @var $converter 

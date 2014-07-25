@@ -1,3 +1,3 @@
 <?php 
- = array();
+ $words_array = array();
 ?>

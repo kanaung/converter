@@ -158,7 +158,8 @@ class Converter {
 	 * @var $lower_zg 
 	 */
 	private $lower_zg = '\x{1033}\x{1034}\x{1060}-\x{1063}\x{1065}-\x{1069}\x{106C}\x{106D}\x{1070}-\x{107D}\x{1085}\x{1087}-\x{108A}\x{1093}';
-
+	/**  Location for overloaded data.  */
+    private $rules = array();
 	/**
 	 * @fn	__construct		
 	 * @brief	Constructor function for Converter class.
@@ -169,6 +170,24 @@ class Converter {
 		$this->ROOT_DIR = dirname(__FILE__) . '/';
 	}
 
+	public function __set($rule_name, $rule_array){
+	//	echo "Setting '$rule_name' to '".var_dump($rule_array)."'\n";
+		$this->rules[$rule_name] = $rule_array;
+	}
+	public function __get($rule_name)
+    {
+	//	echo "getting '$rule_name'\n";
+	//	print_r($this->rules[$rule_name]);
+        if (array_key_exists($rule_name, $this->rules)) {
+            return $this->rules[$rule_name];
+        }
+    }
+	public function get_array($input, $output) {
+		$var_name = $input.'_'.$output;
+		$var_name = str_replace('-','_',$var_name);
+		$rules = $this->rules[$var_name];
+		return $rules;
+	}
 	/**
 	 * @fn	convert
 	 * @memberof Converter
@@ -215,7 +234,7 @@ class Converter {
 		/**
 		 * @var $ext_dir 
 		 */
-		$ext_dir = './ext/';
+		$ext_dir = '/ext/';
 		$rules_dir = 'rules/'. $output;
 		
 		/**
@@ -416,7 +435,7 @@ File is missing or never existed. Try another choice or contact developer!';
 							enchant_broker_free ( $r );
 						} else
 						{
-							include ( $this->ROOT_DIR . $ext . 'dic/dictionary_array.php' );
+							include ( $this->ROOT_DIR . $ext_dir . 'dic/dictionary_array.php' );
 							
 							array_walk ( $words_array, 'space_on_short_words' );
 							foreach ( $words_array as $word )
@@ -544,13 +563,13 @@ File is missing or never existed. Try another choice or contact developer!';
 					}
 					if ( isset ( $suggested ) && true === $suggested )
 					{
-						if ( file_exists ( $this->ROOT_DIR . $ext . 'user/userdic.dic' ) )
+						if ( file_exists ( $this->ROOT_DIR . $ext_dir . 'dic/userdic.dic' ) )
 						{
 							
 							/**
 							 * @var $user_dic 
 							 */
-							$user_dic = file ( $this->ROOT_DIR . $ext . 'user/userdic.dic', FILE_SKIP_EMPTY_LINES );
+							$user_dic = file ( $this->ROOT_DIR . $ext_dir . 'dic/userdic.dic', FILE_SKIP_EMPTY_LINES );
 							array_walk ( $user_dic, 'trim_value' );
 							foreach ( $user_dic as $user_word )
 							{
@@ -585,7 +604,7 @@ File is missing or never existed. Try another choice or contact developer!';
 						/**
 						 * @var $userdic_file 
 						 */
-						$userdic_file = $this->ROOT_DIR . $ext . 'user/userdic.dic';
+						$userdic_file = $this->ROOT_DIR . $ext_dir . 'dic/userdic.dic';
 
 						/**
 						 * @var $uaf 
@@ -725,35 +744,35 @@ File is missing or never existed. Try another choice or contact developer!';
 			/**
 			 * @var $font_enc 
 			 */
-			$font_enc = 'zg';
+			$font_enc = 'zawgyi-one';
 		} elseif ( $length < 7 && preg_match ( $uni_preg, $text, $m ) && !preg_match ( $ay_preg, $text, $m ) )
 		{
 			
 			/**
 			 * @var $font_enc 
 			 */
-			$font_enc = 'uni';
+			$font_enc = 'myanmar3';
 		} elseif ( preg_match ( $uni_preg, $text, $m ) )
 		{
 			
 			/**
 			 * @var $font_enc 
 			 */
-			$font_enc = 'uni';
+			$font_enc = 'myanmar3';
 		} elseif ( preg_match ( $ay_preg, $text, $m ) )
 		{
 			
 			/**
 			 * @var $font_enc 
 			 */
-			$font_enc = 'ay';
+			$font_enc = 'ayar';
 		} else
 		{
 			
 			/**
 			 * @var $font_enc 
 			 */
-			$font_enc = 'ay';
+			$font_enc = 'ayar';
 		}
 		return $font_enc;
 	}
