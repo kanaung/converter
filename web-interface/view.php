@@ -29,9 +29,9 @@ if ( isset ( $converted['file_text'] ) )
 	$now     = sprintf ( "\n/* %s - % s - %s (%s) - %s:%s:%s  */\n", $today['mday'], $today['month'], $today['year'], $today['weekday'], $today['hours'], $today['minutes'], $today['seconds'] );
 	$content = $converted['file_text'];
 	$end     = microtime ( true );
-	$time = "/*Converted in " .
+	$time = "/*" .
 		FormatElapsed ( $start, $end ) .
-		" seconds */\n";
+		"စကၠန့္အတြင္း ေျပာင္းခဲ့သည္။*/\n";
 
 	//var_dump($content);
 	$af = fopen ( $output_file, 'w' ) or die ( "File is not writable or directory does not exist." );
@@ -100,9 +100,7 @@ if ( isset ( $converted['file_text'] ) )
 		
 		$output_text = $converted['output_text'];
 		$end = microtime ( true );
-		$time = "Converted in " .
-			FormatElapsed ( $start, $end ) .
-			" seconds !\n";
+		$time = FormatElapsed ( $start, $end ) ." စက္ကန့်အတွင်း ပြောင်းနိုင်ခဲ့ပါသည်။ !\n";
 	}
 }
 

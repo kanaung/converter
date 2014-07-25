@@ -25,7 +25,7 @@ require( ROOT_DIR . 'web-interface/view.php' ); ?>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/">Kanaung Font Converter | ကနောင် စာလုံးပြောင်းစနစ် </a>
+					<a class="navbar-brand" href="/">ကနောင် စာလုံးပြောင်းစနစ်</a>
 				</div>
 				<div class="collapse navbar-collapse" id="km-navbar-collapse">
 					<ul class="nav navbar-nav">
@@ -65,9 +65,8 @@ require( ROOT_DIR . 'web-interface/view.php' ); ?>
 						</div>
 					</div>
 					<div class="col-sm-2">
-						<div class="btn-block">
-							<br><br><br><br><br><br><br>
-						<button type="submit" name="submit" id="submit" class="btn btn-primary center-block">ပြောင်းရန် <span class="glyphicon glyphicon-arrow-right"></button>
+						<div class="kanaung-middle-submit">
+							<button type="submit" name="submit" id="submit" class="btn btn-primary">ပြောင်းရန် <span class="glyphicon glyphicon-arrow-right"></span></button>
 						</div>
 					</div>
 					<div class="col-sm-5">

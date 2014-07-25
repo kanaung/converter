@@ -1104,6 +1104,13 @@ p {
   font-weight: 300;
   line-height: 1.4;
 }
+.kanaung-middle-submit
+{
+  display: block;
+  text-align: center;
+  height: 300px;
+  padding-top: 130px;
+}
 @media (min-width: 768px) {
   .lead {
     font-size: 21px;
@@ -2283,6 +2290,14 @@ table th[class*="col-"] {
   .table-responsive > .table-bordered > tbody > tr:last-child > td,
   .table-responsive > .table-bordered > tfoot > tr:last-child > td {
     border-bottom: 0;
+  }
+  .kanaung-middle-submit
+  {
+    display: block;
+    text-align: center;
+    height: auto;
+    padding-top: 0px;
+    margin-bottom: 15px;
   }
 }
 fieldset {
