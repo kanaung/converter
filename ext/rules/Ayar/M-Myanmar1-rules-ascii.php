@@ -167,8 +167,9 @@ $conv_rules = array(
  * @var array $order Reorder m-myanmar1 to Unicode standard. 
  */
 $order = array(
-			'([^၀-၉])၇([^၀-၉])?'=>'$1ရ$2',
 			'([a-z0-9]+)ျ'=>'$1s',
 			'([a-z0-9]+)ယ'=>'$1,',
 			'([a-z0-9]+)ါ်'=>'$1:',
+			'([း၊။])([ိီုူ])' => '$2$1',
+			
 		);
