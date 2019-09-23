@@ -283,7 +283,7 @@ File is missing or never existed. Try another choice or contact developer!';
 			/**
 			 * @var $final_regex_array 
 			 */
-			$final_regex_array = array_merge_recursive ( $order, $correction, $zwsp );
+			$final_regex_array = array_merge ( $order, $correction, $zwsp );
 
 			//merge all defined regular expression arrays.
 		} else
@@ -292,7 +292,7 @@ File is missing or never existed. Try another choice or contact developer!';
 			/**
 			 * @var $final_regex_array 
 			 */
-			$final_regex_array = array_merge_recursive ( $order, $correction );
+			$final_regex_array = array_merge ( $order, $correction );
 
 			//merge all defined regular expression arrays without zwsp array.
 		}
